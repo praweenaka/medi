@@ -65,11 +65,11 @@ include_once './connection_sql.php';
                 }
 
                 foreach ($conn->query($sql) as $row) {
-                    $cuscode = $row['custcode'];
+                    $cuscode = $row['code'];
  
  
                     echo "<tr>                 
-                              <td onclick=\"custno('$cuscode','$k');\">" . $row['custcode'] . "</a></td>
+                              <td onclick=\"custno('$cuscode','$k');\">" . $row['code'] . "</a></td>
                               <td onclick=\"custno('$cuscode','$k');\">" . $row['name'] . "</a></td>
                               
                          </tr>";

@@ -43,9 +43,9 @@ if (isset($_GET['url'])) {
     if ($_GET['url'] == "Country") {
         include_once './country.php';      
     }
-    if ($_GET['url'] == "Medical") {
-        include_once './agency.php';      
-    }
+    // if ($_GET['url'] == "Medical") {
+    //     include_once './agency.php';      
+    // }
     if ($_GET['url'] == "Customer") {
         include_once './customer.php';      
     }
@@ -96,8 +96,8 @@ if (isset($_GET['url'])) {
     }
 //////////////////////////////////
 
-     if ($_GET['url'] == "treatment") {
-        include_once './treatment.php';      
+     if ($_GET['url'] == "medical") {
+        include_once './medical.php';      
     }
     
 
@@ -187,3 +187,15 @@ include './autocomple_gl.php';
     $("body").addClass("sidebar-collapse");
 </script>    
 
+<script>
+    var myVar = setInterval(myTimer, 1000);
+
+    function myTimer() {
+
+        var d = new Date();
+//        var dd = d.toLocaleDateString();
+        var tt = d.toLocaleTimeString();
+        document.getElementById("time").innerHTML = tt;
+    }
+
+</script>

@@ -1,213 +1,189 @@
 function GetXmlHttpObject() {
-    var xmlHttp = null;
-    try {
+  var xmlHttp = null;
+  try {
         // Firefox, Opera 8.0+, Safari
         xmlHttp = new XMLHttpRequest();
-    } catch (e) {
+      } catch (e) {
 // Internet Explorer
-        try {
-            xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch (e) {
-            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-    }
-    return xmlHttp;
+try {
+  xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+} catch (e) {
+  xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+}
+return xmlHttp;
 }
 
 function keyset(key, e) {
 
-    if (e.keyCode == 13) {
-        document.getElementById(key).focus();
-    }
+  if (e.keyCode == 13) {
+    document.getElementById(key).focus();
+  }
 }
 
 function got_focus(key) {
-    document.getElementById(key).style.backgroundColor = "#000066";
+  document.getElementById(key).style.backgroundColor = "#000066";
 }
 
 function lost_focus(key) {
-    document.getElementById(key).style.backgroundColor = "#000000";
+  document.getElementById(key).style.backgroundColor = "#000000";
 }
 
 function newent() {
- 
 
-    document.getElementById('cust_txt').value = "";
-    document.getElementById('uniq').value = "";
-    document.getElementById('name_txt').value = "";
-    document.getElementById('addr1_txt').value = "";
-    document.getElementById('addr2_txt').value = "";
-    document.getElementById('contact_txt').value = "";
-    document.getElementById('openbal_txt').value = "";
-    document.getElementById('opdate_txt').value = "";
-    document.getElementById('currbal_txt').value = "";
-    document.getElementById('crlimit_txt').value = "";
-    document.getElementById('telno_txt').value = "";
-    document.getElementById('fax_txt').value = "";
-    document.getElementById('labourno_txt').value = ""; 
- 
-    getdt();
+
+  document.getElementById('cust_txt').value = "";
+  document.getElementById('uniq').value = "";
+  document.getElementById('name_txt').value = "";
+  document.getElementById('addr1_txt').value = ""; 
+  document.getElementById('contact_txt').value = "";   
+
+  getdt();
 }
 
 
 function getdt() {
 
-    xmlHttp = GetXmlHttpObject();
-    if (xmlHttp == null) {
-        alert("Browser does not support HTTP Request");
-        return;
-    }
+  xmlHttp = GetXmlHttpObject();
+  if (xmlHttp == null) {
+    alert("Browser does not support HTTP Request");
+    return;
+  }
 
-    var url = "customer_data.php";
-    url = url + "?Command=" + "getdt";
-    url = url + "&ls=" + "new";
+  var url = "customer_data.php";
+  url = url + "?Command=" + "getdt";
+  url = url + "&ls=" + "new";
 
-    xmlHttp.onreadystatechange = assign_dt;
-    xmlHttp.open("GET", url, true);
-    xmlHttp.send(null);
+  xmlHttp.onreadystatechange = assign_dt;
+  xmlHttp.open("GET", url, true);
+  xmlHttp.send(null);
 }
 
 function assign_dt() {
-    var XMLAddress1;
+  var XMLAddress1;
 
-    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
-    {
+  if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
+  {
 
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("cust_txt");
-        document.getElementById('cust_txt').value = XMLAddress1[0].childNodes[0].nodeValue;
+    XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("cust_txt");
+    document.getElementById('cust_txt').value = XMLAddress1[0].childNodes[0].nodeValue;
 //
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("uniq");
-        document.getElementById('uniq').value = XMLAddress1[0].childNodes[0].nodeValue;
-    }
+XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("uniq");
+document.getElementById('uniq').value = XMLAddress1[0].childNodes[0].nodeValue;
+}
 }
 
 function save_inv()
 {
 
-    xmlHttp = GetXmlHttpObject();
-    if (xmlHttp == null)
-    {
-        alert("Browser does not support HTTP Request");
-        return;
-    }
+  xmlHttp = GetXmlHttpObject();
+  if (xmlHttp == null)
+  {
+    alert("Browser does not support HTTP Request");
+    return;
+  }
 
 
-    if (document.getElementById('cust_txt').value == "") {
-        document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Item Ref Not Enterd</span></div>";
-        $("#msg_box").hide().slideDown(400).delay(2000);
-            $("#msg_box").slideUp(400);
-        return false;
-    }
-    
-    
+  if (document.getElementById('cust_txt').value == "") {
+    document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Please Click New</span></div>";
 
-    var url = "customer_data.php";
-    url = url + "?Command=" + "save_item";
+    return false;
+  }
+  if (document.getElementById('name_txt').value == "") {
+    document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Name Not Entered..</span></div>";
 
-   
+    return false;
+  }
+
+
+
+  var url = "customer_data.php";
+  url = url + "?Command=" + "save_item";
+
+
   
 
-   url = url + "&cust_txt=" + document.getElementById('cust_txt').value;
-   url = url + "&uniq=" + document.getElementById('uniq').value;
-   url = url + "&name_txt=" + document.getElementById('name_txt').value;
-   url = url + "&addr1_txt=" + document.getElementById('addr1_txt').value;
+  url = url + "&cust_txt=" + document.getElementById('cust_txt').value;
+  url = url + "&uniq=" + document.getElementById('uniq').value;
+  url = url + "&name_txt=" + document.getElementById('name_txt').value;
+  url = url + "&addr1_txt=" + document.getElementById('addr1_txt').value;
+  
+  url = url + "&contact_txt=" + document.getElementById('contact_txt').value; 
+  
 
-   url = url + "&addr2_txt=" + document.getElementById('addr2_txt').value;
-   url = url + "&contact_txt=" + document.getElementById('contact_txt').value;
-   url = url + "&openbal_txt=" + document.getElementById('openbal_txt').value;
-   url = url + "&opdate_txt=" + document.getElementById('opdate_txt').value;
-   url = url + "&currbal_txt=" + document.getElementById('currbal_txt').value;
-   url = url + "&crlimit_txt=" + document.getElementById('crlimit_txt').value;
-   url = url + "&telno_txt=" + document.getElementById('telno_txt').value;
-   url = url + "&fax_txt=" + document.getElementById('fax_txt').value;
-   url = url + "&labourno_txt=" + document.getElementById('labourno_txt').value;
-    
-    
-   // url = url + "&uniq=" + document.getElementById('uniq').value;
-    // url = url + "&supplier=" + document.getElementById('supplier').value;
-//    url = url + "&dummy=" + document.getElementById('dummy').value;
-//      url = url + "&dummy=" + document.querySelector('input[type="dummy"]').value;
-    // url = url + "&dummy=" + document.getElementsByClassName('dummy').value;
-//            if (document.getElementById('active').checked == true) {
-//        url = url + "&lockitem=Y"; 
-//    } else {
-//        url = url + "&lockitem=N";
-//    }
-
-
-    xmlHttp.onreadystatechange = salessaveresult;
-    xmlHttp.open("GET", url, true);
-    xmlHttp.send(null);
+  xmlHttp.onreadystatechange = salessaveresult;
+  xmlHttp.open("GET", url, true);
+  xmlHttp.send(null);
 }
 
 function salessaveresult() {
-    var XMLAddress1;
+  var XMLAddress1;
 
-    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+  if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
 
-        if (xmlHttp.responseText == "Saved") {
-            document.getElementById('msg_box').innerHTML = "<div class='alert alert-success' role='alert'><span class='center-block'>Saved</span></div>";
-            $("#msg_box").hide().slideDown(400).delay(2000);
-            $("#msg_box").slideUp(400);
-        } else {
-            document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
-        }
+    if (xmlHttp.responseText == "Saved") {
+      document.getElementById('msg_box').innerHTML = "<div class='alert alert-success' role='alert'><span class='center-block'>Saved</span></div>";
+      $("#msg_box").hide().slideDown(400).delay(2000);
+      $("#msg_box").slideUp(400);
+    } else {
+      document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
     }
+  }
 }
 
 
 function update1() {
 
-   xmlHttp = GetXmlHttpObject();
-   if (xmlHttp == null) {
-       alert("Browser does not support HTTP Request");
-       return;
-   }
-   if (document.getElementById('cust_txt').value == "") {
-       document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Customer Code Entered</span></div>";
-       return false;
-   }
+ xmlHttp = GetXmlHttpObject();
+ if (xmlHttp == null) {
+   alert("Browser does not support HTTP Request");
+   return;
+ }
+ if (document.getElementById('cust_txt').value == "") {
+   document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Customer Code Entered</span></div>";
+   return false;
+ }
 
-    var url = "customer_data.php";
-    url = url + "?Command=" + "update";
+ var url = "customer_data.php";
+ url = url + "?Command=" + "update";
 
-   url = url + "&cust_txt=" + document.getElementById('cust_txt').value;
-   url = url + "&uniq=" + document.getElementById('uniq').value;
-   url = url + "&name_txt=" + document.getElementById('name_txt').value;
-   url = url + "&addr1_txt=" + document.getElementById('addr1_txt').value;
+ url = url + "&cust_txt=" + document.getElementById('cust_txt').value;
+ url = url + "&uniq=" + document.getElementById('uniq').value;
+ url = url + "&name_txt=" + document.getElementById('name_txt').value;
+ url = url + "&addr1_txt=" + document.getElementById('addr1_txt').value;
 
-   url = url + "&addr2_txt=" + document.getElementById('addr2_txt').value;
-   url = url + "&contact_txt=" + document.getElementById('contact_txt').value;
-   url = url + "&openbal_txt=" + document.getElementById('openbal_txt').value;
-   url = url + "&opdate_txt=" + document.getElementById('opdate_txt').value;
-   url = url + "&currbal_txt=" + document.getElementById('currbal_txt').value;
-   url = url + "&crlimit_txt=" + document.getElementById('crlimit_txt').value;
-   url = url + "&telno_txt=" + document.getElementById('telno_txt').value;
-   url = url + "&fax_txt=" + document.getElementById('fax_txt').value;
-   url = url + "&labourno_txt=" + document.getElementById('labourno_txt').value;
+ url = url + "&addr2_txt=" + document.getElementById('addr2_txt').value;
+ url = url + "&contact_txt=" + document.getElementById('contact_txt').value;
+ url = url + "&openbal_txt=" + document.getElementById('openbal_txt').value;
+ url = url + "&opdate_txt=" + document.getElementById('opdate_txt').value;
+ url = url + "&currbal_txt=" + document.getElementById('currbal_txt').value;
+ url = url + "&crlimit_txt=" + document.getElementById('crlimit_txt').value;
+ url = url + "&telno_txt=" + document.getElementById('telno_txt').value;
+ url = url + "&fax_txt=" + document.getElementById('fax_txt').value;
+ url = url + "&labourno_txt=" + document.getElementById('labourno_txt').value;
 
 
-    xmlHttp.onreadystatechange = salessaveresult;
-    xmlHttp.open("GET", url, true);
-    xmlHttp.send(null);
+ xmlHttp.onreadystatechange = salessaveresult;
+ xmlHttp.open("GET", url, true);
+ xmlHttp.send(null);
 }
 
 function update() {
-   var XMLAddress1;
+ var XMLAddress1;
 
-   if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+ if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
 
-       if (xmlHttp.responseText == "update") {
-           document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Updated</span></div>";
-             $("#msg_box").hide().slideDown(400).delay(2000);
-            $("#msg_box").slideUp(400);
+   if (xmlHttp.responseText == "update") {
+     document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Updated</span></div>";
+     $("#msg_box").hide().slideDown(400).delay(2000);
+     $("#msg_box").slideUp(400);
 
-       } else {
-           document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
-             $("#msg_box").hide().slideDown(400).delay(2000);
-            $("#msg_box").slideUp(400);
-       }
+   } else {
+     document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
+     $("#msg_box").hide().slideDown(400).delay(2000);
+     $("#msg_box").slideUp(400);
    }
+ }
 }
 //
 //
