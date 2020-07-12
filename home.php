@@ -99,7 +99,9 @@ if (isset($_GET['url'])) {
      if ($_GET['url'] == "medical") {
         include_once './medical.php';      
     }
-    
+     if ($_GET['url'] == "medical_approve.php") {
+        include_once './medical_approve.php.php';      
+    }
 
 
     

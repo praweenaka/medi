@@ -37,6 +37,7 @@ function newent() {
   document.getElementById('name_txt').value = "";
   document.getElementById('addr1_txt').value = ""; 
   document.getElementById('contact_txt').value = "";   
+  document.getElementById('age').value = "";   
 
   getdt();
 }
@@ -107,7 +108,7 @@ function save_inv()
   url = url + "&uniq=" + document.getElementById('uniq').value;
   url = url + "&name_txt=" + document.getElementById('name_txt').value;
   url = url + "&addr1_txt=" + document.getElementById('addr1_txt').value;
-  
+  url = url + "&age=" + document.getElementById('age').value; 
   url = url + "&contact_txt=" + document.getElementById('contact_txt').value; 
   
 
@@ -123,8 +124,7 @@ function salessaveresult() {
 
     if (xmlHttp.responseText == "Saved") {
       document.getElementById('msg_box').innerHTML = "<div class='alert alert-success' role='alert'><span class='center-block'>Saved</span></div>";
-      $("#msg_box").hide().slideDown(400).delay(2000);
-      $("#msg_box").slideUp(400);
+     setTimeout("location.reload(true);", 500);
     } else {
       document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
     }

@@ -45,8 +45,8 @@ if ($operation == "SAVE") {
         if ($row = $sql->fetch()) {
             exit("Already Saved Medical No...!!!");
         }
-
-        $sqlsave = "Insert into medical(uniq,medino,cuscode,pr,bp,weight,height,bgroup,sdate,treatment,investi,complain,allergy,note,user,datetime) values ('".$cols[uniq]."','".$cols[medino]."','".$cols[name]."','".$cols[pr]."','".$cols[bp]."','".$cols[weight]."','".$cols[height]."','".$cols[bgroup]."','".$cols[sdate]."','".implode(", ", $cols[treatment])."','".implode(", ", $cols[investi])."','".implode(", ", $cols[complain])."','".implode(", ", $cols[allergy])."','".$cols[note]."','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."') ";
+        $bgroup=$cols[bgroup];
+        $sqlsave = "Insert into medical(uniq,medino,cuscode,pr,bp,weight,height,bgroup,sdate,treatment,investi,complain,allergy,note,user,datetime) values ('".$cols[uniq]."','".$cols[medino]."','".$cols[name]."','".$cols[pr]."','".$cols[bp]."','".$cols[weight]."','".$cols[height]."','".$bgroup."','".$cols[sdate]."','".implode(", ", $cols[treatment])."','".implode(", ", $cols[investi])."','".implode(", ", $cols[complain])."','".implode(", ", $cols[allergy])."','".$cols[note]."','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."') ";
 
         $resultsave = $conn->query($sqlsave);
 

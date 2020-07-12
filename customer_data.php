@@ -55,8 +55,8 @@ if ($_GET["Command"] == "save_item") {
             exit("Duplicate ....!!!");
         }
 
-        $sql1 = "Insert into customer(code,uniq,name,add1,tel)values
-        ('" . $_GET['cust_txt'] . "','" . $_GET['uniq'] . "','" . $_GET['name_txt'] . "','" . $_GET['addr1_txt'] . "','" . $_GET['contact_txt'] . "')";
+        $sql1 = "Insert into customer(code,uniq,name,add1,tel,age)values
+        ('" . $_GET['cust_txt'] . "','" . $_GET['uniq'] . "','" . $_GET['name_txt'] . "','" . $_GET['addr1_txt'] . "','" . $_GET['contact_txt'] . "','" . $_GET['age'] . "')";
  
         $result = $conn->query($sql1);
         $sql = "SELECT ctmcode FROM invpara";
@@ -93,24 +93,7 @@ if ($_GET["Command"] == "save_item") {
 //     }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 if ($_GET["Command"] == "delete") {
 
     $sql = "delete from customer where custcode = '" . $_GET['cust_txt'] . "'";

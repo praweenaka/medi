@@ -95,13 +95,13 @@
                <div class="form-group">
                   <label class="col-md-3" for="txt_usernm">PR</label>
                   <div class="col-md-6">
-                     <input type="text" placeholder="PR" id="pr" class="form-control">
+                     <input type="number" placeholder="PR" id="pr" class="form-control">
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-md-3" for="txt_usernm">BP</label>
                   <div class="col-md-6">
-                     <input type="text" placeholder="BP" id="bp" class="form-control">
+                     <input type="number" placeholder="BP" id="bp" class="form-control">
                   </div>
                </div>
                <div class="form-group">
@@ -109,8 +109,14 @@
                   <div class="col-md-6">
                       <select name="bgroup" id="bgroup" class="form-control input-sm" >
                           <option value="">Select Group</option>
-                          <option value="A">A</option>
-                          <option value="B">B</option> 
+                          <option value="A+">A+</option>
+                          <option value="A-">A-</option> 
+                          <option value="B+">B+</option> 
+                          <option value="B-">B-</option> 
+                          <option value="O+">O+</option> 
+                          <option value="O-">O-</option> 
+                          <option value="AB+">AB+</option> 
+                          <option value="AB-">AB-</option>  
                       </select>
                   </div>
                </div>
@@ -128,13 +134,13 @@
                <div class="form-group">
                   <label class="col-md-3" for="txt_usernm">Weight</label>
                   <div class="col-md-6">
-                     <input type="text" placeholder="Weight" id="weight" class="form-control">
+                     <input type="number" placeholder="Weight" id="weight" class="form-control">
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-md-3" for="txt_usernm">Height</label>
                   <div class="col-md-6">
-                     <input type="text" placeholder="Height" id="height" class="form-control">
+                     <input type="number" placeholder="Height" id="height" class="form-control">
                   </div>
                </div> 
                <div class="form-group">

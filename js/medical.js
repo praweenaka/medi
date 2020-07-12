@@ -46,7 +46,7 @@ function newent() {
     $("#allergy").select2('val',''); 
     $("#bgroup").select2('val',''); 
     document.getElementById('container').innerHTML="";
-    // document.getElementById('itemdetails').innerHTML="";
+    document.getElementById('itemdetails').innerHTML="";
 
     getdt();
 
@@ -297,7 +297,7 @@ function save_inv() {
     var main = JSON.stringify(obj);
     var para = "";
     para = para + "main=" + main;
-     
+     alert(para);
     xmlHttp.onreadystatechange = re_save;
     xmlHttp.open("POST", "medical_data.php", true);
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

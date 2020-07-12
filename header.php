@@ -74,6 +74,7 @@ function get_title($url) {
     <head>
 
         <title><?php echo get_title($_GET['url']); ?></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap_custom.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap-multiselect.css">
@@ -105,7 +106,7 @@ function get_title($url) {
         </style>
     </head>
 
-    <body class="hold-transition skin-red sidebar-mini">
+    <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
 
             <header class="main-header">

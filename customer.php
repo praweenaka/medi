@@ -70,9 +70,15 @@
                     </div>
                     <div class="form-group"></div>
                     <div class="form-group-sm">
-                        <label class="col-sm-1" for="invno">Contact Person</label>
+                        <label class="col-sm-1" for="invno">Age</label>
                         <div class="col-sm-3">
-                         <input type="text" placeholder="Contact Person" id="contact_txt" class="form-control  input-sm">
+                         <input type="date" placeholder="Age" id="age" class="form-control  input-sm  ">
+                     </div>
+                     <div class="form-group"></div>
+                    <div class="form-group-sm">
+                        <label class="col-sm-1" for="invno">Contact No</label>
+                        <div class="col-sm-3">
+                         <input type="text" placeholder="Contact No" id="contact_txt" class="form-control  input-sm">
                      </div>
 
                  </div>
