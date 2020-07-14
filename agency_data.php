@@ -26,11 +26,11 @@ if ($_GET["Command"] == "getdt") {
     //$no = trim("0") . substr($tmpinvno, $lenth - 7);
 
     
-    
+    // $ResponseXML .= "<agn_txt><![CDATA[$no]]></agn_txt>";
     
     $ResponseXML .= "<agn_txt><![CDATA[$no]]></agn_txt>";
     $ResponseXML .= "<uniq><![CDATA[$uniq]]></uniq>";
-    
+
     
     
     $ResponseXML .= "</new>";
