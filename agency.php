@@ -9,6 +9,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Medical</h3>
             </div>
+            <!-- medi -->
             <form name= "form1" role="form" class="form-horizontal">
                 <div class="box-body">
                     <input type="hidden" id="tmpno" value="" class="form-control">
