@@ -21,7 +21,7 @@ if ($_GET["Command"] == "getdt") {
     $tmpinvno = "000000" . $no;
     $lenth = strlen($tmpinvno);
     $no = trim("MI/") . substr($tmpinvno, $lenth - 7);
-
+// new
     $ResponseXML .= "<id><![CDATA[$no]]></id>";  
     $ResponseXML .= "</new>"; 
     echo $ResponseXML;
