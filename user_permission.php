@@ -12,7 +12,7 @@ require_once("./connection_sql.php");
             <div class="box-body">
                 <input type="hidden" name="mcount" id="mcount" />
                 <div class="form-group">
-                    <a onclick="newent();" class="btn btn-default">
+                    <a onclick="location.reload();" class="btn btn-default">
                         <span class="fa fa-user-plus"></span> &nbsp; New
                     </a>
                     <a onclick="save_inv1();" class="btn btn-success">

@@ -24,8 +24,7 @@ function newent() {
     document.getElementById('user_name').value = "";
     document.getElementById('pass1').value = "";
     document.getElementById('pass2').value = "";
-    document.getElementById('umail').value = "";
-    document.getElementById('rmail').value = "";
+    document.getElementById('user_type').value = "USER"; 
 
     document.getElementById('msg_box').innerHTML = "";
     getdt();
@@ -62,14 +61,12 @@ function assign_dt() {
 }
 
 
-function getcode(cdata, cdata1, cdata2, cdata3, cdata4) {
+function getcode(cdata, cdata1, cdata2) {
 
 
     document.getElementById('user_name').value = cdata;
     document.getElementById('user_type').value = cdata1;
-   // document.getElementById('user_depart').value = cdata2;
-    document.getElementById('umail').value = cdata3;
-    document.getElementById('rmail').value = cdata4;
+    document.getElementById('user_type').value = cdata2; 
 // hide();
     window.scrollTo(0, 0);
     
@@ -148,23 +145,14 @@ function save_inv()
             document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Confirm Password  Not Entered</span></div>";
             return false;
         }
-        if (document.getElementById('umail').value == "") {
-            document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>User Mail Not Entered</span></div>";
-            return false;
-        }
-        if (document.getElementById('rmail').value == "") {
-            document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Department Head Mail  Not Entered</span></div>";
-            return false;
-        }
+      
 
         var url = "CheckUsers.php";
         url = url + "?Command=" + "save_inv";
         url = url + "&user_name=" + document.getElementById("user_name").value;
     //    url = url + "&user_depart=" + document.getElementById("user_depart").value;
         url = url + "&password=" + document.getElementById("pass1").value;
-        url = url + "&user_type=" + document.getElementById("user_type").value;
-        url = url + "&U_email=" + document.getElementById("umail").value;
-        url = url + "&R_email=" + document.getElementById("rmail").value;
+        url = url + "&user_type=" + document.getElementById("user_type").value; 
 
         xmlHttp.onreadystatechange = passsuppresult_save_inv;
         xmlHttp.open("GET", url, true);
@@ -232,64 +220,19 @@ function passsuppresult_save_inv()
         if (xmlHttp.responseText == "Saved") {
 //            document.getElementById('msg_box').innerHTML = "<div class='alert alert-success' role='alert'><span class='center-block'>Saved</span></div>";
             alert('Saved');
-            newent();
+            location.reload();
 
 //            setTimeout("location.reload(true);", 500);
         } else {
 //            document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
             alert('Created Account');
-            newent();
+           location.reload();
         }
 
 
     }
 }
-
-function edit() {
-//    if (document.getElementById("pass1").value != document.getElementById("pass2").value) {
-//        alert("Please Confirm Password");
-//        document.getElementById("pass2").value = "";
-//        document.getElementById("pass2").focus();
-//    } else {
-
-    xmlHttp = GetXmlHttpObject();
-    if (xmlHttp == null)
-    {
-        alert("Browser does not support HTTP Request");
-        return;
-    }
-
-    if (document.getElementById('user_name').value == "") {
-        document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>User  Not Selected</span></div>";
-        return false;
-    }
-
-    var url = "CheckUsers.php";
-    url = url + "?Command=" + "edit";
-    url = url + "&user_name=" + document.getElementById("user_name").value;
-  //  url = url + "&user_depart=" + document.getElementById("user_depart").value;
-//        url = url + "&password=" + document.getElementById("pass1").value;
-    url = url + "&user_type=" + document.getElementById("user_type").value;
-    url = url + "&U_email=" + document.getElementById("umail").value;
-    url = url + "&R_email=" + document.getElementById("rmail").value;
-
-    xmlHttp.onreadystatechange = edited;
-    xmlHttp.open("GET", url, true);
-    xmlHttp.send(null);
-}
-//}
-function edited() {
-    var XMLAddress1;
-    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-
-        if (xmlHttp.responseText == "EDIT") {
-            document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>EDITED</span></div>";
-            newent();
-        } else {
-            document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
-        }
-    }
-}
+ 
 
 function deleteproduct() {
     xmlHttp = GetXmlHttpObject();

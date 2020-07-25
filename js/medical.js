@@ -1,19 +1,24 @@
-function GetXmlHttpObject() {
+function GetXmlHttpObject()
+{
     var xmlHttp = null;
-    try {
+    try
+    {
         // Firefox, Opera 8.0+, Safari
         xmlHttp = new XMLHttpRequest();
-    } catch (e) {
+    } catch (e)
+    {
         // Internet Explorer
-        try {
+        try
+        {
             xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch (e) {
+        } catch (e)
+        {
             xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
     }
     return xmlHttp;
 }
-
+ 
 function keyset(key, e) {
     if (e.keyCode == 13) {
         document.getElementById(key).focus();
@@ -28,38 +33,70 @@ function lost_focus(key) {
     document.getElementById(key).style.backgroundColor = "#000000";
 }
 
-function newent() {
+function new_ent() {
 
     document.getElementById('msg_box').innerHTML = "";
-    document.getElementById("medino").value="";   
-    document.getElementById("pr").value=""; 
-    document.getElementById("bp").value=""; 
-    document.getElementById("weight").value=""; 
-    document.getElementById("height").value=""; 
-    document.getElementById("bgroup").value="";  
-    document.getElementById('note').value="";
-
-    $("#name").select2('val','');
-    $("#treatment").select2('val','');
-    $("#investi").select2('val','');
-    $("#complain").select2('val','');
-    $("#allergy").select2('val',''); 
-    $("#bgroup").select2('val',''); 
+    document.getElementById("medino").value="";    
+    document.getElementById('note').value=""; 
+    document.getElementById('ndate').value="";   
+    document.getElementById('qty').value="";   
+    document.getElementById('fbc').value="";   
+    document.getElementById('wbc').value="";   
+    document.getElementById('hb').value="";   
+    document.getElementById('plt').value="";   
+    document.getElementById('pcv').value="";   
+    document.getElementById('esp').value="";   
+    document.getElementById('crp').value="";   
+    document.getElementById('ufr').value="";   
+    document.getElementById('screa').value="";   
+    document.getElementById('bu').value="";   
+    document.getElementById('se').value="";   
+    document.getElementById('psa').value="";   
+    document.getElementById('total').value="";   
+    document.getElementById('tg').value="";   
+    document.getElementById('hdl').value="";   
+    document.getElementById('ldl').value="";   
+    document.getElementById('vldl').value="";   
+    document.getElementById('ratio').value="";
+    document.getElementById('fbs').value="";
+    document.getElementById('rbs').value="";
+    document.getElementById('hbalc').value="";
+    document.getElementById('uma').value="";
+    document.getElementById('sgpt').value="";
+    document.getElementById('sgop').value="";
+    document.getElementById('ggt').value="";
+    document.getElementById('sbili').value="";
+    document.getElementById('salmu').value="";
+    document.getElementById('tsh').value="";
+    document.getElementById('t4').value="";
+    document.getElementById('ecg').value="";
+    document.getElementById('weight').value="";
+    document.getElementById('height').value="";
+    document.getElementById('pr').value="";
+    document.getElementById('bp').value="";
+    document.getElementById('to').value="";
+    // $("#name").select2('val','');
+    // $("#item").select2('val','');
+    // $("#investi").select2('val','');
+    // $("#complain").select2('val','');
+    
     document.getElementById('container').innerHTML="";
     document.getElementById('itemdetails').innerHTML="";
-
+    document.getElementById('itemdetails1').innerHTML="";
+    document.getElementById('itemdetails2').innerHTML="";
+    document.getElementById('myTable').innerHTML="";
     getdt();
 
 }
 
 
-var input = document.getElementById("nic");
-input.addEventListener("keyup", function (event) {
-   event.preventDefault();
-   if (event.keyCode == 13) {
-    document.getElementById("tel").focus();
-}
-});
+// var input = document.getElementById("nic");
+// input.addEventListener("keyup", function (event) {
+//   event.preventDefault();
+//   if (event.keyCode == 13) {
+//     document.getElementById("tel").focus();
+// }
+// });
 
 
 function getdt() {
@@ -168,6 +205,12 @@ en_data=[];
 
         XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sales_table");
         document.getElementById('itemdetails').innerHTML = XMLAddress1[0].childNodes[0].nodeValue;
+        
+        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sales_table1");
+        document.getElementById('itemdetails1').innerHTML = XMLAddress1[0].childNodes[0].nodeValue;
+        
+        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sales_table2");
+        document.getElementById('itemdetails2').innerHTML = XMLAddress1[0].childNodes[0].nodeValue;
 
         XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("resu");
         var re = XMLAddress1[0].childNodes[0].nodeValue;
@@ -191,7 +234,7 @@ function go() {
             type: 'column'
         },
         title: {
-            text: 'WEIGHT Diagram'
+            text: 'PRESHER DIAGRAM'
         },
         subtitle: {
             text: ''
@@ -249,7 +292,7 @@ function save_inv() {
         return false;
     }
     if (document.getElementById('name').value == "") {
-        document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Name Not Entered</span></div>";
+        document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Pation Not Selected</span></div>";
         return false;
     }
 
@@ -258,11 +301,10 @@ function save_inv() {
     //     sex="Male";
     // }else{
     //     sex="FeMale";
-    // } 
-    var treatment = $('#treatment').val();
+    // }  
     var investi = $('#investi').val();
     var complain = $('#complain').val();
-    var allergy = $('#allergy').val();
+    
 
     var obj = {
         "Main": "SAVE",
@@ -276,18 +318,47 @@ function save_inv() {
         {
             "uniq":document.getElementById("uniq").value,
             "medino":document.getElementById("medino").value, 
-            "name":document.getElementById("name").value,  
-            "pr":document.getElementById("pr").value, 
-            "bp":document.getElementById("bp").value, 
-            "weight":document.getElementById("weight").value, 
-            "height":document.getElementById("height").value, 
-            "bgroup":document.getElementById("bgroup").value, 
+            "code":document.getElementById("name").value,   
             "sdate":document.getElementById("sdate").value, 
-            "note":document.getElementById("note").value, 
-            "treatment":treatment,  
+            "note":document.getElementById("note").value,  
+            "ndate":document.getElementById('ndate').value, 
+            "fbc":document.getElementById('fbc').value,
+            "wbc":document.getElementById('wbc').value,
+            "hb":document.getElementById('hb').value,
+            "plt":document.getElementById('plt').value,
+            "pcv":document.getElementById('pcv').value,
+            "esp":document.getElementById('esp').value,
+            "crp":document.getElementById('crp').value,
+            "ufr":document.getElementById('ufr').value,
+            "screa":document.getElementById('screa').value,
+            "bu":document.getElementById('bu').value,
+            "se":document.getElementById('se').value,
+            "psa":document.getElementById('psa').value,
+            "total":document.getElementById('total').value,
+            "tg":document.getElementById('tg').value,
+            "hdl":document.getElementById('hdl').value,
+            "ldl":document.getElementById('ldl').value,
+            "vldl":document.getElementById('vldl').value,
+            "ratio":document.getElementById('ratio').value,
+            "fbs":document.getElementById('fbs').value,
+            "rbs":document.getElementById('rbs').value,
+            "hbalc":document.getElementById('hbalc').value,
+            "uma":document.getElementById('uma').value,
+            "sgpt":document.getElementById('sgpt').value,
+            "sgop":document.getElementById('sgop').value,
+            "ggt":document.getElementById('ggt').value,
+            "sbili":document.getElementById('sbili').value,
+            "salmu":document.getElementById('salmu').value,
+            "tsh":document.getElementById('tsh').value,
+            "t4":document.getElementById('t4').value,
+            "ecg":document.getElementById('ecg').value,
+            "weight":document.getElementById('weight').value,
+            "height":document.getElementById('height').value,
+            "pr":document.getElementById('pr').value,
+            "bp":document.getElementById('bp').value,
+            "to":document.getElementById('to').value,
             "investi":investi, 
-            "complain":complain, 
-            "allergy":allergy, 
+            "complain":complain,  
             // "sex":sex,    
         }
 
@@ -297,7 +368,7 @@ function save_inv() {
     var main = JSON.stringify(obj);
     var para = "";
     para = para + "main=" + main;
-     alert(para);
+    
     xmlHttp.onreadystatechange = re_save;
     xmlHttp.open("POST", "medical_data.php", true);
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -320,52 +391,17 @@ function re_save() {
         }
     }
 }
-
-function passcusresult_quot()
+ 
+ function custno(code)
 {
-    var XMLAddress1;
-
-    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
-    {
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("id");
-        var obj = JSON.parse(XMLAddress1[0].childNodes[0].nodeValue);
-
-
-        opener.document.getElementById('refno_txt').value= obj.refno;
-        opener.document.getElementById('pport_txt').value= obj.pport;
-        opener.document.getElementById('ldate_txt').value= obj.ldate;
-        opener.document.getElementById('agency_txt').value= obj.agency;
-        opener.document.getElementById('ctry_txt').value= obj.ctry;
-        opener.document.getElementById('gccno_txt').value= obj.gccno;
-        opener.document.getElementById('v_cholerae_txt').value= obj.v_cholerae;
-        opener.document.getElementById('helminths_txt').value= obj.helminths;
-        opener.document.getElementById('bilharziasis_txt').value= obj.bilharziasis;
-        opener.document.getElementById('sal_sheg_txt').value= obj.sal_sheg;
-        opener.document.getElementById('sugar_txt').value= obj.sugar;
-        opener.document.getElementById('albumin_txt').value=obj.albumin;
-        opener.document.getElementById('u_bilharziasis_txt').value= obj.u_bilharziasis;
-        opener.document.getElementById('preg_txt').value= obj.pregnancy;
-        opener.document.getElementById('hivtest_txt').value= obj.HIVtest;
-        opener.document.getElementById('hbsag_txt').value= obj.HBsag;
-        opener.document.getElementById('antihcv_txt').value= obj.antiHCV;
-        
-        
-
-        self.close();
-    }
-
-}
-
-
-function custno(code)
-{
+    //alert(code);
     xmlHttp = GetXmlHttpObject();
     if (xmlHttp == null)
     {
         alert("Browser does not support HTTP Request");
         return;
     }
-    var url = "treatment_data.php";
+    var url = "medical_data.php";
     url = url + "?Command=" + "pass_quot";
     url = url + "&custno=" + code;
 
@@ -379,133 +415,189 @@ function custno(code)
 function passcusresult_quot()
 {
     var XMLAddress1;
+
     if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
     {
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("invoiceno");
-        opener.document.form1.invoiceno.value = XMLAddress1[0].childNodes[0].nodeValue;
-
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sdate");
-        opener.document.form1.sdate.value = XMLAddress1[0].childNodes[0].nodeValue;
-
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("fname");
-        opener.document.form1.fname.value = XMLAddress1[0].childNodes[0].nodeValue;
-
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("lname");
-        opener.document.form1.lname.value = XMLAddress1[0].childNodes[0].nodeValue;
-
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("nic");
-        opener.document.form1.nic.value = XMLAddress1[0].childNodes[0].nodeValue;
-
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sex");
-        if (XMLAddress1[0].childNodes[0].nodeValue == "male") {
-            opener.document.getElementById('male').checked = true;
-        } else {
-            opener.document.getElementById('female').checked = true;
-        }
-
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("cancel");
-
-        if (XMLAddress1[0].childNodes[0].nodeValue == "1") {
-            opener.document.getElementById('msg_box').innerHTML = "<div class='alert alert-danger' role='alert'><span class='center-block'>Canceled</span></div>";
-
-        } else {
-
-        }
+ 
+        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("id");
+        var obj = JSON.parse(XMLAddress1[0].childNodes[0].nodeValue);
+         
+        opener.document.getElementById('medino').value = obj.medino;
+        // opener.document.getElementById('name').value = obj.name; 
+        opener.document.getElementById('sdate').value = obj.sdate; 
+        opener.document.getElementById('ndate').value = obj.ndate;  
+        // opener.document.getElementById('note').innerHTML. = obj.note; 
+         // opener.document.getElementById('investi').innerHTML. = obj.investi; 
+          // opener.document.getElementById('complain').innerHTML. = obj.complain; 
+        
+        opener.document.getElementById('fbc').value = obj.fbc;
+        opener.document.getElementById('wbc').value = obj.wbc;
+        opener.document.getElementById('hb').value = obj.hb;
+        opener.document.getElementById('plt').value = obj.plt;
+        opener.document.getElementById('pcv').value = obj.pcv;
+        opener.document.getElementById('esp').value = obj.esp;
+        opener.document.getElementById('crp').value = obj.crp;
+        opener.document.getElementById('ufr').value = obj.ufr;
+        opener.document.getElementById('screa').value = obj.screa;
+        opener.document.getElementById('bu').value = obj.bu;
+        opener.document.getElementById('se').value = obj.se;
+        opener.document.getElementById('psa').value = obj.psa;
+        opener.document.getElementById('total').value = obj.total;
+        opener.document.getElementById('tg').value = obj.tg;
+        opener.document.getElementById('hdl').value = obj.hdl;
+        opener.document.getElementById('ldl').value = obj.ldl;
+        opener.document.getElementById('vldl').value = obj.vldl;
+        opener.document.getElementById('ratio').value = obj.ratio;
+        opener.document.getElementById('fbs').value = obj.fbs;
+        opener.document.getElementById('rbs').value = obj.rbs;
+        opener.document.getElementById('hbalc').value = obj.hbalc;
+        opener.document.getElementById('uma').value = obj.uma;
+        opener.document.getElementById('sgpt').value = obj.sgpt;
+        opener.document.getElementById('sgop').value = obj.sgop;
+        opener.document.getElementById('ggt').value = obj.ggt;
+        opener.document.getElementById('sbili').value = obj.sbili;
+        opener.document.getElementById('salmu').value = obj.salmu;
+        opener.document.getElementById('tsh').value = obj.tsh;
+        opener.document.getElementById('t4').value = obj.t4;
+        opener.document.getElementById('ecg').value = obj.ecg;
+        opener.document.getElementById('weight').value = obj.weight;
+        opener.document.getElementById('height').value = obj.height;
+        opener.document.getElementById('pr').value = obj.pr;
+        opener.document.getElementById('bp').value = obj.bp;
+        opener.document.getElementById('to').value = obj.to1;
+        
+        
+        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sales_table");
+        opener.document.getElementById('myTable').innerHTML = XMLAddress1[0].childNodes[0].nodeValue;
+        
+        
         self.close();
-
     }
-
+  
 }
 
+function add()
+{   
+ 
+			 
+			xmlHttp=GetXmlHttpObject();
+			if (xmlHttp==null)
+			{
+				alert ("Browser does not support HTTP Request");
+				return;
+			} 		 
 
+			 var url="medical_data.php"; 
+              if (document.getElementById('item').value == "") {
+		         alert('Item is Empty...');
+                return;
+             } 
+             if (document.getElementById('qty').value == "") {
+		         alert('Qty is Empty...');
+                return;
+             } 
+              
+		     var params ="Command="+"addtreat";   
+		     params = params + "&Command1=add"; 
+             params=params+"&item="+document.getElementById('item').value;   
+             params=params+"&uniq="+document.getElementById('uniq').value;   
+             params=params+"&qty="+document.getElementById('qty').value;     
+             params=params+"&medino="+document.getElementById('medino').value;    
+			
+			xmlHttp.open("POST", url, true);
 
-function update_cust_list(stname)
-{
-    xmlHttp = GetXmlHttpObject();
-    if (xmlHttp == null)
-    {
-        alert("Browser does not support HTTP Request");
-        return;
-    }
-    var url = "treatment_data.php";
-    url = url + "?Command=" + "search_custom";
-    if (document.getElementById('cusno').value != "") {
-        url = url + "&mstatus=cusno";
-    } else if (document.getElementById('customername').value != "") {
-        url = url + "&mstatus=customername";
-    } else if (document.getElementById('nic').value != "") {
-        url = url + "&mstatus=nic";
-    }
-
-    url = url + "&invoiceno=" + document.getElementById('cusno').value;
-    url = url + "&fname=" + document.getElementById('customername').value;
-    url = url + "&nic=" + document.getElementById('nic').value;
-    url = url + "&stname=" + stname;
-
-    xmlHttp.onreadystatechange = showcustresult;
-    xmlHttp.open("GET", url, true);
-    xmlHttp.send(null);
-
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlHttp.setRequestHeader("Content-length", params.length);
+	xmlHttp.setRequestHeader("Connection", "close");
+	
+	xmlHttp.onreadystatechange=re_treat;
+			
+	xmlHttp.send(params);
+			
 }
 
+ 
 
-function showcustresult()
+function del_item(cdata)
+{   
+ 
+    
+		xmlHttp=GetXmlHttpObject();
+			if (xmlHttp==null)
+			{
+				alert ("Browser does not support HTTP Request");
+				return;
+			} 
+			 
+		        var url="medical_data.php"; 
+			    var params ="Command="+"addtreat";  
+    			params=params+"&Command1=del"; 
+    			params=params+"&id="+cdata; 
+    			params=params+"&medino="+document.getElementById('medino').value;    
+    		    params=params+"&uniq="+document.getElementById('uniq').value;    
+		  
+	xmlHttp.open("POST", url, true);
 
-{
-    var XMLAddress1;
-
-    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
-    {
-        document.getElementById('filt_table').innerHTML = xmlHttp.responseText;
-    }
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlHttp.setRequestHeader("Content-length", params.length);
+	xmlHttp.setRequestHeader("Connection", "close");
+	
+	xmlHttp.onreadystatechange=re_treat;
+			
+	xmlHttp.send(params);
+			
 }
-
-
-
-function print_inv() {
-
-    var url = "invoice_print.php";
-    url = url + "?invoiceno=" + document.getElementById('invoiceno').value;
-    url = url + "&fname=" + document.getElementById('fname').value;
-    url = url + "&address=" + document.getElementById('address').value;
-    url = url + "&nic=" + document.getElementById('nic').value;
-    url = url + "&sdate=" + document.getElementById('sdate').value;
-
-    window.open(url, '_blank');
-
-}
-
-
-
-function cancel_inv() {
-    var msg = confirm("Do you want to CANCEL this Invoice ! ");
-    if (msg == true) {
-        xmlHttp = GetXmlHttpObject();
-        if (xmlHttp == null)
-        {
-            alert("Browser does not support HTTP Request");
-            return;
-        }
-        if (document.getElementById('invoiceno').value == "") {
-            document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>invoice Is Not Selected</span></div>";
-            return false;
-        }
-
-        var url = "treatment_data.php";
-        url = url + "?Command=" + "cancelItem";
-        url = url + "&invoiceno=" + document.getElementById('invoiceno').value;
-
-        xmlHttp.onreadystatechange = showarmyresult_can;
-        xmlHttp.open("GET", url, true);
-        xmlHttp.send(null);
-    }
-}
-
-function showarmyresult_can() {
+ 
+function re_treat() {
     var XMLAddress1;
     if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+ 
+        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sales_table");
+        document.getElementById('myTable').innerHTML = XMLAddress1[0].childNodes[0].nodeValue; 
+         
+        
+         document.getElementById('qty').value ="";
+    }
+}
+
+
+function cancel_inv()
+{   
+ 
+			 
+			xmlHttp=GetXmlHttpObject();
+			if (xmlHttp==null)
+			{
+				alert ("Browser does not support HTTP Request");
+				return;
+			} 		
+			
+		  var msg = confirm("Do you want to CANCEL this ! ");
+        if (msg == true) {
+
+			 var url="medical_data.php"; 
+			    var params ="Command="+"cancel_inv"; 
+                params=params+"&medino="+document.getElementById('medino').value;   
+			   
+			xmlHttp.open("POST", url, true);
+
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlHttp.setRequestHeader("Content-length", params.length);
+	xmlHttp.setRequestHeader("Connection", "close");
+	
+	xmlHttp.onreadystatechange=re_cancel;
+			
+	xmlHttp.send(params);
+        }  
+			
+}
+
+function re_cancel() {
+    var XMLAddress1;
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+
         if (xmlHttp.responseText == "Cancel") {
-            document.getElementById('msg_box').innerHTML = "<div class='alert alert-danger' role='alert'><span class='center-block'>Canceled</span></div>";
+            document.getElementById('msg_box').innerHTML = "<div class='alert alert-success' role='alert'><span class='center-block'>Cancel</span></div>";
             setTimeout("location.reload(true);", 500);
         } else {
             document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
@@ -513,6 +605,4 @@ function showarmyresult_can() {
     }
 
 }
-
-
-
+ 

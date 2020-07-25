@@ -27,7 +27,7 @@ if (isset($_COOKIE[$cookie_name])) {
 
         <script src="js/vuepkg.js" type="text/javascript"></script>
         <script src="js/user.js"></script>
-
+        <link rel="icon" type="image/png" sizes="16x16" href="dist/images.png">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <style>
@@ -91,7 +91,7 @@ if (isset($_COOKIE[$cookie_name])) {
                     <div>
                         <!--<img style="align-content: center" class="img-responsive" src="img/Mas_Holdings_Logo.png">-->
                         <div class="form-group" >
-                            <h1 id="topic"><center>Medical <span style="color: red;">System</span></center></h1>
+                            <h1 id="topic"><center>SENIMRO <span style="color: red;">MEDICAL</span></center></h1>
                         </div>
                     </div>
                     <!--<h3><center>MAS HOLDINGS</center></h3>-->

@@ -1,32 +1,43 @@
-function GetXmlHttpObject() {
-  var xmlHttp = null;
-  try {
+function GetXmlHttpObject()
+{
+    var xmlHttp = null;
+    try
+    {
         // Firefox, Opera 8.0+, Safari
         xmlHttp = new XMLHttpRequest();
-      } catch (e) {
-// Internet Explorer
-try {
-  xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-} catch (e) {
-  xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-}
-}
-return xmlHttp;
-}
-
-function keyset(key, e) {
-
-  if (e.keyCode == 13) {
-    document.getElementById(key).focus();
-  }
+    } catch (e)
+    {
+        // Internet Explorer
+        try
+        {
+            xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e)
+        {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+    }
+    return xmlHttp;
 }
 
-function got_focus(key) {
-  document.getElementById(key).style.backgroundColor = "#000066";
+
+function keyset(key, e)
+{
+
+    if (e.keyCode == 13) {
+        document.getElementById(key).focus();
+    }
 }
 
-function lost_focus(key) {
-  document.getElementById(key).style.backgroundColor = "#000000";
+function got_focus(key)
+{
+    document.getElementById(key).style.backgroundColor = "#000066";
+
+}
+
+function lost_focus(key)
+{
+    document.getElementById(key).style.backgroundColor = "#000000";
+
 }
 
 function newent() {
@@ -37,10 +48,16 @@ function newent() {
   document.getElementById('name_txt').value = "";
   document.getElementById('addr1_txt').value = ""; 
   document.getElementById('contact_txt').value = "";   
-  document.getElementById('age').value = "";   
-
+  document.getElementById('age').value = "";    
+   document.getElementById('email').value = "";    
+  document.getElementById('note').value = "";    
+  document.getElementById('msg_box').innerHTML = "";    
+  $("#allergy").select2('val','');  
+  $("#bgroup").select2('val','');  
+  $("#s_diag").select2('val','');   
   getdt();
 }
+
 
 
 function getdt() {
@@ -74,6 +91,8 @@ document.getElementById('uniq').value = XMLAddress1[0].childNodes[0].nodeValue;
 }
 }
 
+
+
 function save_inv()
 {
 
@@ -102,16 +121,19 @@ function save_inv()
   url = url + "?Command=" + "save_item";
 
 
-  
-
+  var allergy = $('#allergy').val(); 
+  var s_diag = $('#s_diag').val(); 
+  url = url + "&allergy=" + allergy;   
+  url = url + "&s_diag=" + s_diag;   
   url = url + "&cust_txt=" + document.getElementById('cust_txt').value;
   url = url + "&uniq=" + document.getElementById('uniq').value;
   url = url + "&name_txt=" + document.getElementById('name_txt').value;
   url = url + "&addr1_txt=" + document.getElementById('addr1_txt').value;
   url = url + "&age=" + document.getElementById('age').value; 
   url = url + "&contact_txt=" + document.getElementById('contact_txt').value; 
-  
-
+  url = url + "&bgroup=" + document.getElementById('bgroup').value; 
+  url = url + "&email=" + document.getElementById('email').value; 
+  url = url + "&note=" + document.getElementById('note').value; 
   xmlHttp.onreadystatechange = salessaveresult;
   xmlHttp.open("GET", url, true);
   xmlHttp.send(null);
@@ -132,244 +154,92 @@ function salessaveresult() {
 }
 
 
-function update1() {
 
- xmlHttp = GetXmlHttpObject();
- if (xmlHttp == null) {
-   alert("Browser does not support HTTP Request");
-   return;
- }
- if (document.getElementById('cust_txt').value == "") {
-   document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Customer Code Entered</span></div>";
-   return false;
- }
+ 
+function cancel() {
+    xmlHttp = GetXmlHttpObject();
+    if (xmlHttp == null) {
+        alert("Browser does not support HTTP Request");
+        return;
+    }
+     var msg = confirm("Do you want to CANCEL this invoice ! ");
+        if (msg == true) {
+    if (document.getElementById('cust_txt').value == "") {
+        document.getElementById('msg_box').innerHTML = "<div class='alert alert-danger' role='alert'><span class='center-block'>Pation Not Selected</span></div>";
+        return false;
+    }
 
- var url = "customer_data.php";
- url = url + "?Command=" + "update";
+    var url = "customer_data.php";
+    url = url + "?Command=" + "cancel";
+    url = url + "&cust_txt=" + document.getElementById('cust_txt').value;
 
- url = url + "&cust_txt=" + document.getElementById('cust_txt').value;
- url = url + "&uniq=" + document.getElementById('uniq').value;
- url = url + "&name_txt=" + document.getElementById('name_txt').value;
- url = url + "&addr1_txt=" + document.getElementById('addr1_txt').value;
-
- url = url + "&addr2_txt=" + document.getElementById('addr2_txt').value;
- url = url + "&contact_txt=" + document.getElementById('contact_txt').value;
- url = url + "&openbal_txt=" + document.getElementById('openbal_txt').value;
- url = url + "&opdate_txt=" + document.getElementById('opdate_txt').value;
- url = url + "&currbal_txt=" + document.getElementById('currbal_txt').value;
- url = url + "&crlimit_txt=" + document.getElementById('crlimit_txt').value;
- url = url + "&telno_txt=" + document.getElementById('telno_txt').value;
- url = url + "&fax_txt=" + document.getElementById('fax_txt').value;
- url = url + "&labourno_txt=" + document.getElementById('labourno_txt').value;
-
-
- xmlHttp.onreadystatechange = salessaveresult;
- xmlHttp.open("GET", url, true);
- xmlHttp.send(null);
+    xmlHttp.onreadystatechange = re_cancel;
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
 }
 
-function update() {
- var XMLAddress1;
+function re_cancel() {
+    var XMLAddress1;
 
- if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
 
-   if (xmlHttp.responseText == "update") {
-     document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Updated</span></div>";
-     $("#msg_box").hide().slideDown(400).delay(2000);
-     $("#msg_box").slideUp(400);
-
-   } else {
-     document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
-     $("#msg_box").hide().slideDown(400).delay(2000);
-     $("#msg_box").slideUp(400);
-   }
- }
+        if (xmlHttp.responseText == "Canceled") {
+            document.getElementById('msg_box').innerHTML = "<div class='alert alert-danger' role='alert'><span class='center-block'>Canceled</span></div>";
+            setTimeout("location.reload(true);", 500);
+        } else {
+            document.getElementById('msg_box').innerHTML = "<div class='alert alert-danger' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
+        }
+    }
 }
-//
-//
-//function delete1() {
-//    xmlHttp = GetXmlHttpObject();
-//    if (xmlHttp == null) {
-//        alert("Browser does not support HTTP Request");
-//        return;
-//    }
-//    if (document.getElementById('reference_no').value == "") {
-//        document.getElementById('msg_box').innerHTML = "<div class='alert alert-danger' role='alert'><span class='center-block'>Reference NO  Not Entered</span></div>";
-//        return false;
-//    }
-//
-//    var url = "po_requistion_note_data.php";
-//    url = url + "?Command=" + "delete";
-//
-//    url = url + "&reference_no=" + document.getElementById('reference_no').value;
-//
-//    xmlHttp.onreadystatechange = delete2;
-//    xmlHttp.open("GET", url, true);
-//    xmlHttp.send(null);
-//
-//}
-
-//function delete2() {
-//    var XMLAddress1;
-//
-//    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-//
-//        if (xmlHttp.responseText == "delete") {
-//            document.getElementById('msg_box').innerHTML = "<div class='alert alert-danger' role='alert'><span class='center-block'>Deleted</span></div>";
-//
-//        } else {
-//            document.getElementById('msg_box').innerHTML = "<div class='alert alert-danger' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
-//        }
-//    }
-//}
-//function print() {
-//    var url = "po_requistion_note_data_print.php";
-//    url = url + "?Command=" + "save";
-//    url = url + "&reference_no=" + document.getElementById('reference_no').value;
-//    window.open(url, "_blank");
-//}
-
-//function add_tmp() {
-//    xmlHttp = GetXmlHttpObject();
-//    if (xmlHttp == null) {
-//        alert("Browser does not support HTTP Request");
-//        return;
-//    }
-//
-//    var url = "po_requistion_note_data.php";
-//    url = url + "?Command=" + "setitem";
-//    url = url + "&Command1=" + "add_tmp";
-//
-//
-//    url = url + "&reference_no=" + document.getElementById('reference_no').value;
-//    url = url + "&rec_no=" + document.getElementById('rec_no').value;
-//    url = url + "&product_code=" + document.getElementById('product_code').value;
-//    url = url + "&product_description=" + document.getElementById('product_description').value;
-//    url = url + "&quantity=" + document.getElementById('quantity').value;
-//    url = url + "&umo=" + document.getElementById('umo').value;
-//    url = url + "&uniq=" + document.getElementById('uniq').value;
-//    xmlHttp.onreadystatechange = aodtmp;
-//    xmlHttp.open("GET", url, true);
-//    xmlHttp.send(null);
-//
-//
-//}
 
 
-//function aodtmp() {
-//    var XMLAddress1;
-//
-//    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-//
-//        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sales_table");
-//        document.getElementById('itemdetails').innerHTML = XMLAddress1[0].childNodes[0].nodeValue;
-//
-//
-//
-//
-//
-//    }
-//}
+ 
+ function custno(code)
+{
+    //alert(code);
+    xmlHttp = GetXmlHttpObject();
+    if (xmlHttp == null)
+    {
+        alert("Browser does not support HTTP Request");
+        return;
+    }
+    var url = "customer_data.php";
+    url = url + "?Command=" + "pass_quot";
+    url = url + "&custno=" + code;
 
-//function remove_tmp(id) {
-//    xmlHttp = GetXmlHttpObject();
-//    if (xmlHttp == null) {
-//        alert("Browser does not support HTTP Request");
-//        return;
-//    }
-//
-//    var url = "po_requistion_note_data.php";
-//    url = url + "?Command=" + "removerow";
-//
-//    url = url + "&uniq=" + document.getElementById('uniq').value;
-////    url = url + "&sjrequestref=" + document.getElementById('sjrequestref_txt').value;
-//    url = url + "&id=" + id;
-//
-//
-//    xmlHttp.onreadystatechange = removeAdo;
-//    xmlHttp.open("GET", url, true);
-//    xmlHttp.send(null);
-//
-//
-//}
+    xmlHttp.onreadystatechange = passcusresult_quot;
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+
+}
 
 
-//function removeAdo() {
-//    var XMLAddress1;
-//
-//    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-//
-//        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sales_table");
-//        document.getElementById('itemdetails').innerHTML = XMLAddress1[0].childNodes[0].nodeValue;
-//
-//    }
-//}
+function passcusresult_quot()
+{
+    var XMLAddress1;
+
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
+    {
+ 
+        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("id");
+        var obj = JSON.parse(XMLAddress1[0].childNodes[0].nodeValue);
+         
+        opener.document.getElementById('cust_txt').value = obj.code;
+        opener.document.getElementById('name_txt').value = obj.name;
+        opener.document.getElementById('addr1_txt').value = obj.add1; 
+         opener.document.getElementById('email').value = obj.email;
+        opener.document.getElementById('contact_txt').value = obj.tel; 
+         opener.document.getElementById('bgroup').value = obj.bgroup;
+        opener.document.getElementById('age').value = obj.age; 
+        opener.document.getElementById('note').value = obj.note;    
+        
+        // opener.document.getElementById('allergy').value. = obj.allergy; 
+        // opener.document.getElementById('s_diag').value. = obj.s_diag; 
+        
+        self.close();
+    }
 
 
 
-//function add_tmp() {
-//    xmlHttp = GetXmlHttpObject();
-//    if (xmlHttp == null) {
-//        alert("Browser does not support HTTP Request");
-//        return;
-//    }
-
-// split and remove before zeros
-//    var id = document.getElementById('aodnumber').value;
-//    var split = id.split("/");
-//    var mid = parseInt(split[2]);
-
-
-
-//     var url = "po_requistion_note_data.php";
-//    url = url + "?Command=" + "setitem";
-//    url = url + "&Command1=" + "add_tmp";
-
-//    url = url + "&aodnumber=" + mid;
-//    url = url + "&reference_no=" + document.getElementById('reference_no').value;
-//    url = url + "&rec_no=" + document.getElementById('rec_no').value;
-//    url = url + "&product_code=" + document.getElementById('product_code').value;
-//    url = url + "&product_description=" + document.getElementById('product_description').value;
-//    url = url + "&quantity=" + document.getElementById('quantity').value;
-//    url = url + "&umo=" + document.getElementById('umo').value;
-//    url = url + "&uniq=" + document.getElementById('uniq').value;
-//      alert(url);
-//
-//    xmlHttp.onreadystatechange = aodtmp;
-//    xmlHttp.open("GET", url, true);
-//    xmlHttp.send(null);
-//
-//
-//}
-
-
-//function aodtmp() {
-//    var XMLAddress1;
-//
-////  var XMLAddress1;
-//       
-//    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-//    
-//        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sales_table");
-//        document.getElementById('itemdetails').innerHTML = XMLAddress1[0].childNodes[0].nodeValue;
-//
-//
-
-
-//        document.getElementById('order_id').value = "";
-//        document.getElementById('description').value = "";
-//        document.getElementById('qty').value = "";
-
-
-//
-//    }
-//}
-
-
-
-
-
-
-
-
-
+}

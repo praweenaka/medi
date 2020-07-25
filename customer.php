@@ -1,13 +1,30 @@
-    <!-- Main content -->
-    <?php
-    require_once './connection_sql.php';
-    ?>
+<?php
+   session_start();
+   ?> 
+<style type="text/css">
+   @import url(https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css);
+     
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script type="text/javascript">
+   $(function () {
+     $("select").select2();
+   });
+   
+</script>
     <link rel="stylesheet" href="css/themes/redmond/jquery-ui-1.10.3.custom.css" />
     <section class="content">
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Customer</h3>
+                <h3 class="box-title">Patient</h3>
+                <h4 style="float: right;height: 3px;"><b id="time"></b></h4>
             </div>
             <form name= "form1" role="form" class="form-horizontal">
                 <div class="box-body">
@@ -28,9 +45,9 @@
                         </a>
 
 
-                        <a onclick="update111();" class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-download"></span> &nbsp; Update
-                        </a>
+                        <!--<a onclick="update111();" class="btn btn-danger btn-sm">-->
+                        <!--    <span class="glyphicon glyphicon-download"></span> &nbsp; Update-->
+                        <!--</a>-->
 
                         <a onclick="cancel();" class="btn btn-danger btn-sm">
                             <span class="glyphicon glyphicon-remove"></span> &nbsp; CANCEL
@@ -42,9 +59,9 @@
                     <div class="col-md-12">
                         <div class="form-group"></div>
                         <div class="form-group-sm">
-                            <label class="col-md-1" for="invno">Customer Code</label>
+                            <label class="col-md-2" for="invno">PATIENT CODE</label>
                             <div class="col-sm-3">
-                                <input type="text" placeholder="Customer Code" id="cust_txt" class="form-control  input-sm" disabled="">
+                                <input type="text" placeholder="PATIENT CODE" id="cust_txt" class="form-control  input-sm" disabled="">
                             </div>
 
                             <div class="col-sm-3">
@@ -56,43 +73,102 @@
 
                         <div class="form-group"></div>
                         <div class="form-group-sm">
-                          <label class="col-sm-1" for="invno">Name</label>
+                          <label class="col-sm-2" for="invno">NAME</label>
                           <div class="col-sm-3">
-                            <input type="text" placeholder="Name" id="name_txt" class="form-control  input-sm">
+                            <input type="text" placeholder="NAME" id="name_txt" class="form-control  input-sm">
                         </div>
                         <div class="form-group"></div>
                         <div class="form-group-sm">
-                           <label class="col-sm-1" for="invno">Address</label>
+                           <label class="col-sm-2" for="invno">ADDRESS</label>
                            <div class="col-sm-3">
-                            <input type="text" placeholder="Address" id="addr1_txt" class="form-control  input-sm">
+                            <input type="text" placeholder="ADDRESS" id="addr1_txt" class="form-control  input-sm">
                         </div> 
 
                     </div>
                     <div class="form-group"></div>
                     <div class="form-group-sm">
-                        <label class="col-sm-1" for="invno">Age</label>
+                        <label class="col-sm-2" for="invno">BIRTHDAY</label>
                         <div class="col-sm-3">
-                         <input type="date" placeholder="Age" id="age" class="form-control  input-sm  ">
+                         <input type="date" placeholder="BIRTHDAY" id="age" class="form-control  input-sm  ">
                      </div>
                      <div class="form-group"></div>
                     <div class="form-group-sm">
-                        <label class="col-sm-1" for="invno">Contact No</label>
+                        <label class="col-sm-2" for="invno">CONTACT NO</label>
                         <div class="col-sm-3">
-                         <input type="text" placeholder="Contact No" id="contact_txt" class="form-control  input-sm">
+                         <input type="text" placeholder="CONTACT NO" id="contact_txt" class="form-control  input-sm">
                      </div>
 
                  </div>
-
+                 <div class="form-group"></div>
+                <div class="form-group-sm">
+                      <label class="col-md-2" for="txt_usernm">B GROUP</label>
+                      <div class="col-md-3">
+                          <select name="bgroup" id="bgroup" class="form-control input-sm" >
+                              <!--<option value="">Select Group</option>-->
+                              <option value="A+">A+</option>
+                              <option value="A-">A-</option> 
+                              <option value="B+">B+</option> 
+                              <option value="B-">B-</option> 
+                              <option value="O+">O+</option> 
+                              <option value="O-">O-</option> 
+                              <option value="AB+">AB+</option> 
+                              <option value="AB-">AB-</option>  
+                          </select>
+                      </div>
+                   </div>
 
                  <div class="form-group"></div>
                  <div class="form-group-sm">
 
-                     <label class="col-sm-1" for="invno">E-mail Address</label>
+                     <label class="col-sm-2" for="invno">E-MAIL ADDRESS</label>
                      <div class="col-sm-3">
 
-                        <input type="text" placeholder="E-mail Address" id="email_txt" class="form-control  input-sm">
+                        <input type="text" placeholder="E-MAIL ADDRESS" id="email" class="form-control  input-sm">
                     </div>
                 </div>
+                
+                
+                <div class="form-group"></div>
+                 <div class="form-group-sm">
+
+                     <label class="col-sm-2" for="invno">ALLERGY</label>
+                     <div class="col-sm-3">
+                        <select name="allergy" id="allergy" style="width: 100%" multiple="multiple"  class="form-control input-sm"> 
+                                             <?php
+                                                require_once("./connection_sql.php");
+                                                $sql = "Select * from allergy  where cancel ='0'";
+                                                foreach ($conn->query($sql) as $row) {
+                                                    echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
+                        }
+                        ?>
+                     </select>
+                    </div>
+                </div>
+                <div class="form-group"></div>
+                 <div class="form-group-sm">
+
+                     <label class="col-sm-2" for="invno">SPECIAL DIAGNOSIS</label>
+                     <div class="col-sm-3">
+                        <select name="s_diag" id="s_diag" style="width: 100%" multiple="multiple"  class="form-control input-sm"> 
+                                             <?php
+                                                require_once("./connection_sql.php");
+                                                $sql = "Select * from s_diagnosis  where cancel ='0'";
+                                                foreach ($conn->query($sql) as $row) {
+                                                    echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
+                        }
+                        ?>
+                     </select>
+                    </div>
+                </div>
+                <div class="form-group"></div>
+                <div class="form-group-sm">
+
+                     <label class="col-sm-2" for="invno">MEDICAL/SURGICAL HISTORY</label>
+                     <div class="col-sm-3">
+                         <textarea placeholder="MEDICAL/SURGICAL HISTORY" id="note" class="form-control input-sm"></textarea>
+                    </div>
+                </div>
+                
 
             </div>
 
@@ -101,17 +177,10 @@
     </form>
 
 </div>
-
-
-
-
-
-
-
+ 
 
 </section>
-<script src="js/customer.js"></script>
-<script>newent();</script>
+<script src="js/customer.js"></script> 
 
-
+<script>setTimeout(function(){ newent(); }, 1700);</script>
 

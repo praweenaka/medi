@@ -18,18 +18,13 @@ if ($_GET["Command"] == "getdt") {
     $result = $conn->query($sql);
     $row = $result->fetch();
     $no = $row['ctmcode'];
-
-    //echo print_r($row);
-//    uniq
+ 
     $uniq = uniqid();
 
     $tmpinvno = "0000" . $no;
     $lenth = strlen($tmpinvno);
     $no = trim("CUS/") . substr($tmpinvno, $lenth - 5);
-
-
-
-
+ 
     $ResponseXML .= "<cust_txt><![CDATA[$no]]></cust_txt>";
     $ResponseXML .= "<uniq><![CDATA[$uniq]]></uniq>";
     
@@ -52,16 +47,16 @@ if ($_GET["Command"] == "save_item") {
         $result1 = $conn->query($sql1);
         //echo $sql;
         if ($row1 = $result1->fetch()) {
-            exit("Duplicate ....!!!");
+            exit("Duplicate Customer....!!!");
         }
-
-        $sql1 = "Insert into customer(code,uniq,name,add1,tel,age)values
-        ('" . $_GET['cust_txt'] . "','" . $_GET['uniq'] . "','" . $_GET['name_txt'] . "','" . $_GET['addr1_txt'] . "','" . $_GET['contact_txt'] . "','" . $_GET['age'] . "')";
+        $bgroup=$_GET['bgroup']; 
+        $sql1 = "Insert into customer(code,uniq,name,add1,tel,age,bgroup,allergy,email,note,user,sdate,s_diag)values
+        ('" . $_GET['cust_txt'] . "','" . $_GET['uniq'] . "','" . $_GET['name_txt'] . "','" . $_GET['addr1_txt'] . "','" . $_GET['contact_txt'] . "','" . $_GET['age'] . "','".$bgroup."','".$_GET['allergy']."','" . $_GET['email'] . "','" . $_GET['note'] . "','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."','" . $_GET['s_diag'] . "')";
  
         $result = $conn->query($sql1);
-        $sql = "SELECT ctmcode FROM invpara";
-        $result = $conn->query($sql);
-        $row = $result->fetch(); 
+        
+         $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_GET['cust_txt'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Pation', 'Save', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+         $result2 = $conn->query($sql2);
         
         $sql = "update invpara set ctmcode=ctmcode+1";
         $result = $conn->query($sql);
@@ -74,141 +69,54 @@ if ($_GET["Command"] == "save_item") {
     }
 }
 
-// if ($_GET["Command"] == "update") {
+if ($_GET["Command"] == "cancel") {
 
-//        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//         $conn->beginTransaction();
-//     try {
-//         $sql = "update customer set custcode ='".$_GET['cust_txt']."',name='".$_GET['name_txt']."',address1='".$_GET['addr1_txt']."',address2='".$_GET['addr2_txt']."', contact='".$_GET['contact_txt']."',opening_bal='".$_GET['openbal_txt']."',opening_dt= '".$_GET['opdate_txt']."',current_bal= '". $_GET['currbal_txt']."', credit_lmt='".$_GET['crlimit_txt']."',telno='".$_GET['telno_txt']."',fax= '".$_GET['fax_txt']."',labourno= '". $_GET['labourno_txt']."' where custcode = '" . $_GET['cust_txt'] . "'";
-
-
-
-//         $result = $conn->query($sql);
-
-//         $conn->commit();
-//         echo "Updated";
-//     } catch (Exception $e) {
-//         $conn->rollBack();
-//         echo $e;
-//     }
-// }
-
- 
-if ($_GET["Command"] == "delete") {
-
-    $sql = "delete from customer where custcode = '" . $_GET['cust_txt'] . "'";
-    $result = $conn->query($sql);
-    //  echo $sql;
-    echo "delete";
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn->beginTransaction();
+        try {
+            $sql1 = "select * from customer where code = '" . $_GET['cust_txt'] . "'";
+        $result1 = $conn->query($sql1); 
+        if ($row1 = $result1->fetch()) {
+            $sql = "update customer set cancel ='1' where code='".$_GET['cust_txt']."'";
+             $result = $conn->query($sql);
+             
+             $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_GET['cust_txt'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Pation', 'Cancel', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+             $result2 = $conn->query($sql2);
+    
+            $conn->commit();
+            echo "Canceled";
+        }else{
+            echo "No Result Found..";
+        }
+            
+        } catch (Exception $e) {
+            $conn->rollBack();
+            echo $e;
+        }
 }
 
+if ($_GET["Command"] == "pass_quot") {
+    $_SESSION["custno"] = $_GET['custno'];
 
-if ($_GET["Command"] == "setitem") {
     header('Content-Type: text/xml');
     echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 
     $ResponseXML = "";
     $ResponseXML .= "<salesdetails>";
 
+    $cuscode = $_GET["custno"];
 
+    $sql = "Select * from customer where cancel='0' and code ='" . $cuscode . "'";
+    $sql = $conn->query($sql);
 
-    if ($_GET["Command1"] == "add_tmp") {
-
-
-        $sql = "Insert into treatments_temp(t_refno,uniq,av_trments)values 
-        ('" . $_GET['refno_txt'] . "','" . $_GET['uniq'] . "','" . $_GET['av_treat'] . "')";
-
-        $result = $conn->query($sql);
-        // echo $sql;
+    if ($rowM = $sql->fetch()) {
+        $ResponseXML .= "<id><![CDATA[" . json_encode($rowM) .  "]]></id>";
     }
 
-    $ResponseXML .= "<sales_table><![CDATA[<table id='myTable' class='table table-bordered'>
-    <thead>
-    <tr>
 
-    <th style='width: 70%;'>Available Treatments</th>
-
-    </tr>
-    <tr>
-    <th style='width: 10%;'>Add/Remove</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>
-    <input type='text' placeholder=''  id='av_treat' class='form-control input-sm'>
-    </td>
-
-
-    <td><a onclick='add_tmp();' class='btn btn-default btn-sm'> <span class='fa fa-plus'></span> &nbsp; </a></td>
-
-
-    </tr>";
-
-
-
-
-    $sql1 = "SELECT * from treatments_temp where uniq = '" . $_GET['uniq'] . "'";
-
-
-    foreach ($conn->query($sql1) as $row2) {
-
-        $ResponseXML .= "<tr><td>" . $row2['av_trments'] . "</td><td><a onclick='remove_tmp(" . $row2['id'] . ");' class='btn btn-default btn-sm'><span class=''></span> &nbsp; REMOVE</a></td></tr>";
-    }
-
-    $ResponseXML .= "</tbody></table>";
-    $ResponseXML .= "</table>]]></sales_table>";
     $ResponseXML .= "</salesdetails>";
     echo $ResponseXML;
 }
 
-
-if ($_GET["Command"] == "removerow") {
-    header('Content-Type: text/xml');
-    echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-
-    $ResponseXML = "";
-    $ResponseXML .= "<salesdetails>";
-
-    $sql = "delete from treatments_temp where id = '" . $_GET['id'] . "'";
-    $result = $conn->query($sql);
-    $ResponseXML .= "<sales_table><![CDATA[<table id='myTable' class='table table-bordered'>
-    <thead>
-
-    <tr>
-    <th style='width: 70%;'>Available Treatments</th>
-    </tr>
-    <tr>
-    <th style='width: 10%;'>Add/Remove</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>
-    <input type='text' placeholder=''  id='av_treat' class='form-control input-sm'>
-    </td>
-
-
-
-    <td><a onclick='add_tmp();' class='btn btn-default btn-sm'> <span class='fa fa-plus'></span> &nbsp; </a></td>
-
-
-    </tr>";
-
-
-
-
-    $sql1 = "SELECT * FROM treatments_temp where uniq = '" . $_GET['uniq'] . "'";
-
-
-    foreach ($conn->query($sql1) as $row2) {
-
-        $ResponseXML .= "<tr><td>" . $row2['av_trments'] . "</td><td><a onclick='remove_tmp(" . $row2['id'] . ");' class='btn btn-default btn-sm'><span class=''></span> &nbsp; REMOVE</a></td></tr>";
-    }
-
-    $ResponseXML .= "</tbody></table>";
-    $ResponseXML .= "</table>]]></sales_table>";
-    $ResponseXML .= "</salesdetails>";
-    echo $ResponseXML;
-}
+  
 ?>

@@ -23,8 +23,7 @@ function save() {
     var url = "change_psw_data.php";
     url = url + "?Command=" + "save";
     url = url + "&usn=" + document.getElementById('usn').value;
-    url = url + "&psw=" + document.getElementById('psw').value;
-    url = url + "&creditCombo=" + document.getElementById('creditCombo').value;
+    url = url + "&psw=" + document.getElementById('psw').value; 
 
     xmlHttp.onreadystatechange = result_save;
     xmlHttp.open("GET", url, true);

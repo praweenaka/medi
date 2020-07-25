@@ -7,15 +7,12 @@
         <form role="form" class="form-horizontal">
             <div class="box-body">
                 <div class="form-group">
-                    <a onclick="newent();" class="btn btn-default">
+                    <a onclick="location.reload();" class="btn btn-default">
                         <span class="fa fa-user-plus"></span> &nbsp; New
                     </a>
                     <a onclick="save_inv();" class="btn btn-success">
                         <span class="fa fa-save"></span> &nbsp; Save
-                    </a>
-                    <a onclick="edit();" class="btn btn-warning">
-                        <span class="fa fa-edit"></span> &nbsp; Edit
-                    </a>
+                    </a> 
                     <a onclick="deleteproduct();" class="btn btn-danger">
                         <span class="fa fa-trash"></span> &nbsp; Delete
                     </a>
@@ -48,44 +45,15 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="txt_password1">User Type</label>
                     <div class="col-sm-2">
-                        <?php
-                        echo"<select id = \"user_type\" class = \"form-control input-sm\">";
-                        $sql = "select * from user_type";
-                        foreach ($conn->query($sql) as $row) {
-                            echo "<option value='" . trim($row["user_type"]) . "'>" . $row["user_type"] . "</option>";
-                        }
-                        echo"</select>";
-                        ?>
+                        <select id="user_type" class="form-control input-sm">
+                        <option value="USER">USER</option> 
+                        <option value="ADMIN">ADMIN</option>
+                        </select>
                     </div>
                 </div>	
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="txt_password1">User Credit Department</label>
-                    <div class="col-sm-2">
-                        <?php
-//                        echo"<select id = \"user_depart\" class = \"form-control input-sm\">";
-//                        $sql = "select * from creditdepart_master";
-//                        foreach ($conn->query($sql) as $row) {
-//                            echo "<option value='" . trim($row["user_depart"]) . "'>" . $row["user_depart"] . "</option>";
-//                        }
-//                        echo"</select>";
-                        ?>
-                    </div>
-                </div>	
+               	
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="txt_password">User Mail</label>
-                    <div class="col-sm-3">
-                        <input type="text" placeholder="User Mail" id="umail" class="form-control">
-
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="txt_password">Department Head Mail</label>
-                    <div class="col-sm-3">
-                        <input type="text" placeholder="Department Head Mail" id="rmail" class="form-control">
-
-                    </div>
-                </div>
+                
             </div>
 
             <div id="itemdetails"></div>

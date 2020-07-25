@@ -2,77 +2,26 @@
 include './CheckCookie.php';
 require_once ('connection_sql.php');
 $cookie_name = "user";
-// if (isset($_COOKIE[$cookie_name])) {
-//     $mo = chk_cookie($_COOKIE[$cookie_name]);
-//     if ($mo != "ok") {
-//         header('Location: ' . "index.php");
-//         exit();
-//     }
-// } else {
-//     header('Location: ' . "index.php");
-//     exit();
-// }
+if (isset($_COOKIE[$cookie_name])) {
+    $mo = chk_cookie($_COOKIE[$cookie_name]);
+    if ($mo != "ok") {
+        header('Location: ' . "index.php");
+        exit();
+    }
+} else {
+    header('Location: ' . "index.php");
+    exit();
+}
 $mtype = "";
 include "header.php";
 
 if (isset($_GET['url'])) {
 
-
-    //Master File
-    if ($_GET['url'] == "country") {
-        include_once './country.php';
-    }
-    if ($_GET['url'] == "nationality") {
-        include_once './nationality.php';
-    }
   
-    if ($_GET['url'] == "medprn") {
-        include_once './medical_print.php';
-    }
-	
-	
-  
-	
-	 if ($_GET['url'] == "srm") {
-        include_once './service_register.php';      
-    }
-
-     if ($_GET['url'] == "mi") {
-        include_once './medical_inquiry.php';      
-    }
-    if ($_GET['url'] == "Country") {
-        include_once './country.php';      
-    }
-    // if ($_GET['url'] == "Medical") {
-    //     include_once './agency.php';      
-    // }
     if ($_GET['url'] == "Customer") {
         include_once './customer.php';      
     }
-    
-    
-   
-    
-     if ($_GET['url'] == "cs") {
-        include_once './cashier.php';
-    }
-
-     if ($_GET['url'] == "cs") {
-        include_once './cashier.php';
-    }
-    
      
-     if ($_GET['url'] == "csh") {
-        include_once './cashier.php';
-    }
-     
-     if ($_GET['url'] == "md") {
-        include_once './medical_delivery.php';
-    }
-    if ($_GET['url'] == "medicallist") {
-        include_once './medical_list.php';
-    }
-
     
     if ($_GET['url'] == "new_user") {
         include_once './new_user.php';
@@ -83,14 +32,7 @@ if (isset($_GET['url'])) {
     if ($_GET['url'] == "change_password") {
         include_once './change_password.php';
     }
-
-    if ($_GET['url'] == "matching") {
-        include_once './matching.php';
-    }
-
-    if ($_GET['url'] == "BarcodePrint") {
-        include_once './barcode_print.php';
-    }
+ 
     if ($_GET['url'] == "create") {
         include_once './create.php';
     }
@@ -99,8 +41,24 @@ if (isset($_GET['url'])) {
      if ($_GET['url'] == "medical") {
         include_once './medical.php';      
     }
-     if ($_GET['url'] == "medical_approve.php") {
-        include_once './medical_approve.php.php';      
+    if ($_GET['url'] == "medical_approve") {
+        include_once './medical_approve.php';      
+    }
+    if ($_GET['url'] == "category_master") {
+        include_once './category_master.php';      
+    }
+    if ($_GET['url'] == "pharamacy") {
+        include_once './pharamacy.php';      
+    }
+     if ($_GET['url'] == "mediitemmas") {
+        include_once './mediitemmas.php';      
+    }
+    
+    if ($_GET['url'] == "report") {
+        include_once './report.php';      
+    }
+    if ($_GET['url'] == "expenses") {
+        include_once './expense.php';      
     }
 
 
@@ -125,14 +83,10 @@ include_once './footer.php';
 
     $(function () {
 
-
-
-
-        $(document).ready(function () {
+    $(document).ready(function () {
             $('#brand').multiselect();
-        });
-
-
+    });
+ 
     });
 
 </script>
@@ -161,11 +115,11 @@ include './autocomple_gl.php';
 <script src="plugins/recaptcha_4.2.0/index.php"></script>
 <script>
 
+// $(function() {
+// 	FastClick.attach(document.body);
+// });
     $(function () {
-
-
-
-
+ 
         $(document).ready(function () {
             $('#approveCombo').multiselect();
         });

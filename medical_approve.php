@@ -13,10 +13,10 @@
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>Medical No</th>
-                                <th>Customer</th>
-                                <th>Nic</th>
-                                <th>Treatment</th>  
+                                <th>MEDICAL NO</th>
+                                <th>PATIENT</th>  
+                                <th>COMPALIN</th>
+                                <th>DIAGNOSIS</th> 
                                 <th></th>  
                             </tr>
                         </thead>
@@ -29,12 +29,13 @@
                                 ?>
                                 <tr>
                                     <td><?php echo $row['medino']; ?></td>
-                                    <td><?php echo $row['cus_code']; ?></td> 
-                                    <td><?php echo $row['nic']; ?></td> 
-                                    <td><?php echo $row['treatment']; ?></td> 
+                                    <td><?php echo $row['cusname']; ?></td>    
+                                    <td><input type="text" class="form-control" disabled value="<?php echo $row['complain']; ?>"/></td>
+                                    <td><input type="text" class="form-control" disabled value="<?php echo $row['investi']; ?>"/></td> 
                                     <td>
-                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" onclick="itemapprove(<?php echo $row['id']; ?>);" data-target="#del_<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Approve</button>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" onclick="itemdele(<?php echo $row['id']; ?>);" data-target="#del_<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Cancel</button>
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" onclick="edit(<?php echo $row['id']; ?>,$ab);" data-target="#del_<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Edit</button>
+                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" onclick="approve(<?php echo $row['id']; ?>);" data-target="#del_<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Approve</button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" onclick="dele(<?php echo $row['id']; ?>);" data-target="#del_<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Cancel</button>
                                     </td>
                                 </tr>
                                 <?php
@@ -50,27 +51,59 @@
 
 </section>
 
-<!--<script src="js/newitem.js"></script>-->
+<!--<script src="js/medical_approve.js"></script>-->
 <script>
 
-    function itemdele(cdate) {
+    function edit(cdate,ab) {
 
         xmlHttp = GetXmlHttpObject();
         if (xmlHttp == null) {
             alert("Browser does not support HTTP Request");
             return;
         }
+        var url = "medical_approve_data.php";
+        var params ="Command="+"edit";    
+        params = params + "&id=" + cdate;
+        // alert(ab);
+         xmlHttp.open("POST", url, true);
 
-        var url = "newitem_data.php";
-        url = url + "?Command=" + "itemdel";
-        url = url + "&id=" + cdate;
-
-        xmlHttp.onreadystatechange = item_del;
-        xmlHttp.open("GET", url, true);
-        xmlHttp.send(null);
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlHttp.setRequestHeader("Content-length", params.length);
+	xmlHttp.setRequestHeader("Connection", "close");
+	
+	xmlHttp.onreadystatechange=item_del;
+			
+	xmlHttp.send(params);  
 
     }
-    function itemapprove(cdate) {
+    
+    function dele(cdate) {
+
+        xmlHttp = GetXmlHttpObject();
+        if (xmlHttp == null) {
+            alert("Browser does not support HTTP Request");
+            return;
+        }
+        
+        var msg = confirm("Do you want to CANCEL this ! ");
+        if (msg == true) {
+        var url = "medical_approve_data.php";
+        var params ="Command="+"del";    
+        params = params + "&id=" + cdate;
+        
+         xmlHttp.open("POST", url, true);
+
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlHttp.setRequestHeader("Content-length", params.length);
+	xmlHttp.setRequestHeader("Connection", "close");
+	
+	xmlHttp.onreadystatechange=item_del;
+			
+	xmlHttp.send(params);  
+
+    }
+    }
+    function approve(cdate) {
 
         xmlHttp = GetXmlHttpObject();
         if (xmlHttp == null) {
@@ -78,13 +111,19 @@
             return;
         }
 
-        var url = "newitem_data.php";
-        url = url + "?Command=" + "itemapprove";
-        url = url + "&id=" + cdate;
+        var url = "medical_approve_data.php";
+        var params ="Command="+"approve";    
+        params = params + "&id=" + cdate;
+        
+         xmlHttp.open("POST", url, true);
 
-        xmlHttp.onreadystatechange = item_del;
-        xmlHttp.open("GET", url, true);
-        xmlHttp.send(null);
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlHttp.setRequestHeader("Content-length", params.length);
+	xmlHttp.setRequestHeader("Connection", "close");
+	
+	xmlHttp.onreadystatechange=item_del;
+			
+	xmlHttp.send(params); 
 
     }
 
@@ -93,7 +132,15 @@
         var XMLAddress1;
 
         if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+            alert(xmlHttp.responseText);
             setTimeout("location.reload(true);", 500);
         }
     }
+</script>
+
+<script>
+    // setTimeout(function () {
+    //     location.reload()
+    // }, 9000);
+
 </script>

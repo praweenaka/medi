@@ -1,5 +1,5 @@
 <!-- Main content -->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <section class="content-header">
 
     <h1>
@@ -22,7 +22,7 @@
 
     <div class="row">
 
-
+<!--<div class="col-sm-9">-->
 
         <?php
 
@@ -40,9 +40,10 @@
 
             echo"<div class=\"inner\">";
 
-            echo"<h3><a href='home.php?url=" . trim($row1['name']) . "' style=\"color: white; font-family: Verdana,Sans-serif;\" class=\"small-box-footer\">" . trim($row1['docname']) . "</a></h3></font>";
+            echo"<h3 style=\"display: inline-block;
+  width: 100%;\"><a href='home.php?url=" . trim($row1['name']) . "' style=\"color: white; font-size:30PX;font-family: Verdana,Sans-serif;\" class=\"small-box-footer\">" . trim($row1['docname']) . "</a></h3></font>";
 
-            echo"<h4>&nbsp;</h4>";
+            
 
             echo"</div>";
 
@@ -66,10 +67,11 @@
 
         ?>
 
-    </div>
+    <!--</div>-->
+    
+    <!--=================-->
 
-
-
+</div>
 </section>
 
 

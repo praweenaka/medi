@@ -53,6 +53,7 @@ function chk_cookie($UserName) {
         //$ResponseXML .= "<stat><![CDATA[" . $action . "]]></stat>";
         $time = date("H:i:s");
         $today = date('Y-m-d');
+        clearstatcache();
 //        $sql = "Insert into loging(Name,User_Type,Date,Logon_Time,Sessioan_Id,ip) values ('" . $UserName . "','" . $_SESSION['User_Type'] . "','" . $today . "','" . $time . "','" . $_SESSION['sessionId'] . "','" . $ip . "')";
 //        $conn->exec($sql);
         return $action;
