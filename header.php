@@ -72,6 +72,7 @@ function get_title($url) {
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        
 
         <title><?php echo get_title($_GET['url']); ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

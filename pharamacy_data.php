@@ -162,8 +162,8 @@ if ($_POST["Command"] == "add_item") {
         
             $sql3 = "delete from tmp_pharmacy_item   where pharmcyno='".$_POST['pharmcyno']."' and tmp_no='".$_POST['uniq']."' and item='".$_POST['item']."'";
             $result3 = $conn->query($sql3);
-       
-            $sql = "SELECT * FROM s_mas where code='" . $_POST['item'] . "' and qty>='".$_POST['qty']."'";  
+       		// $sql = "SELECT * FROM s_mas where code='" . $_POST['item'] . "' and qty>='".$_POST['qty']."'";  
+            $sql = "SELECT * FROM s_mas where code='" . $_POST['item'] . "'";  
             $result = $conn->query($sql);
             if ($row = $result->fetch()) {
                  $sql2 = "Insert into tmp_pharmacy_item(pharmcyno,item,name,qty,tmp_no,selling,user) values
@@ -171,7 +171,7 @@ if ($_POST["Command"] == "add_item") {
                 
                  $result2 = $conn->query($sql2);
             }else{
-                exit("Under Stock...!!!");
+                // exit("Under Stock...!!!");
             }
         
      }
@@ -231,11 +231,11 @@ if ($_POST["Command"] == "save") {
         
          $sqltmp= "select * from tmp_pharmacy_item where pharmcyno='".$_POST['pharmcyno']."' and tmp_no='".$_POST['uniq']."'";
          foreach ($conn->query($sqltmp) as $rowtmp) {
-            $sqlmas = "SELECT * FROM s_mas where code='" . $rowtmp['item'] . "' and qty<'".$rowtmp['qty']."'";   
-            $resultmas = $conn->query($sqlmas);
-            if ($rowmas = $resultmas->fetch()) {
-                exit("Under Stock  '".$rowtmp['name']."'");
-            }
+            // $sqlmas = "SELECT * FROM s_mas where code='" . $rowtmp['item'] . "' and qty<'".$rowtmp['qty']."'";   
+            // $resultmas = $conn->query($sqlmas);
+            // if ($rowmas = $resultmas->fetch()) {
+            //     exit("Under Stock  '".$rowtmp['name']."'");
+            // }
             $sql2 = "Insert into pharmacy_item(pharmcyno,item,name,qty,tmp_no,selling) values
             ('".$_POST['pharmcyno']."','".$rowtmp['item']."','".$rowtmp['name']."','".$rowtmp['qty']."','".$_POST['uniq']."','".$rowtmp['selling']."') ";
              $result2 = $conn->query($sql2);
