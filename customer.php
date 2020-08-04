@@ -89,7 +89,7 @@
                     <div class="form-group-sm">
                         <label class="col-sm-2" for="invno">BIRTHDAY</label>
                         <div class="col-sm-3">
-                         <input type="date" placeholder="BIRTHDAY" id="age" class="form-control  input-sm  ">
+                         <input type="text" placeholder="BIRTHDAY" id="age" class="form-control dt input-sm  ">
                      </div>
                      <div class="form-group"></div>
                     <div class="form-group-sm">
