@@ -23,7 +23,7 @@
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Patient</h3>
+                <h3 class="box-title">ADD PATIENT</h3>
                 <h4 style="float: right;height: 3px;"><b id="time"></b></h4>
             </div>
             <form name= "form1" role="form" class="form-horizontal">
@@ -147,7 +147,7 @@
                 <div class="form-group"></div>
                  <div class="form-group-sm">
 
-                     <label class="col-sm-2" for="invno">SPECIAL DIAGNOSIS</label>
+                     <label class="col-sm-2" for="invno">MEDICAL/SERGICAL HISTORY</label>
                      <div class="col-sm-3">
                         <select name="s_diag" id="s_diag" style="width: 100%" multiple="multiple"  class="form-control input-sm"> 
                                              <?php
@@ -163,9 +163,9 @@
                 <div class="form-group"></div>
                 <div class="form-group-sm">
 
-                     <label class="col-sm-2" for="invno">MEDICAL/SURGICAL HISTORY</label>
+                     <label class="col-sm-2" for="invno">NOTE</label>
                      <div class="col-sm-3">
-                         <textarea placeholder="MEDICAL/SURGICAL HISTORY" id="note" class="form-control input-sm"></textarea>
+                         <textarea placeholder="NOTE" id="note" class="form-control input-sm"></textarea>
                     </div>
                 </div>
                 

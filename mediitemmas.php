@@ -21,7 +21,7 @@
 <section class="content">
    <div class="box box-primary">
    <div class="box-header with-border">
-      <h3 class="box-title"><b>MEDICAL MASTER</b></h3>
+      <h3 class="box-title"><b>ADD PRODUCTS/PURCHASES</b></h3>
       <h4 style="float: right;height: 3px;"><b id="time"></b></h4>
 
    </div>
@@ -48,7 +48,7 @@
                <div class="form-group">
                   <label class="col-md-5" for="txt_usernm">DATE</label>
                   <div class="col-md-6">
-                     <input type="date"   value="<?php echo date('Y-m-d'); ?>"   id="sdate" class="form-control input-sm  ">
+                     <input type="text"   value="<?php echo date('Y-m-d'); ?>" disabled  id="sdate" class="form-control dt input-sm  ">
                   </div>
                </div>
             </div>
@@ -62,7 +62,7 @@
             <div class="col-md-5">
                  
                <div class="form-group">
-                  <label class="col-md-3" for="txt_usernm">Code</label>
+                  <label class="col-md-3" for="txt_usernm">CODE</label>
                   <div class="col-md-5">
                      <input type="text" placeholder="Code" id="code" class="form-control  input-sm" disabled="">
                   </div>
@@ -80,7 +80,7 @@
                      <input type="text" placeholder="DESCRIPTION" id="des" class="form-control  input-sm">
                   </div>
                </div>
-               <div class="form-group">
+               <div class="form-group hidden">
                   <label class="col-md-3" for="txt_usernm">BRAND</label>
                   <div class="col-md-6">
                                   <select name="brand" id="brand1" class="form-control input-sm" >
@@ -95,7 +95,7 @@
                                   </select>
                               </div>
                </div>
-               <div class="form-group">
+               <div class="form-group hidden">
                   <label class="col-md-3" for="txt_usernm">COUNTRY</label>
                  <div class="col-md-6">
                                   <select name="country" id="country" class="form-control input-sm" >
@@ -112,19 +112,19 @@
                <div class="form-group">
                   <label class="col-md-3" for="txt_usernm">COST</label>
                   <div class="col-md-6">
-                     <input type="text" placeholder="COST" id="cost1" disabled class="form-control  input-sm  ">
+                     <input type="text" placeholder="COST" id="cost1"   class="form-control  input-sm  ">
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-md-3" for="txt_usernm">SELLING</label>
                   <div class="col-md-6">
-                      <input type="text" placeholder="SELLING" id="selling1" disabled class="form-control  input-sm">
+                      <input type="text" placeholder="SELLING" id="selling1"   class="form-control  input-sm">
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-md-3" for="txt_usernm">QTY</label>
                   <div class="col-md-6">
-                      <input type="text" placeholder="QTY" id="qty1" disabled class="form-control  input-sm">
+                      <input type="text" placeholder="QTY" id="qty1"   class="form-control  input-sm">
                   </div>
                </div>            
             </div>
@@ -151,7 +151,7 @@
                           
                         <div class="form-group"></div>
                             <div class="row col-sm-12"> 
-                                <div class="col-sm-3">
+                                <div class="col-md-4">
                                      <select name="item" id="item" class="form-control input-sm" >
                                       <?php
                                            require_once("./connection_sql.php");
@@ -181,14 +181,14 @@
 
                             <div class="row">
 
-                                <div class="table-responsive " style="margin-top: 45px; height:300px; width: 90%;overflow:auto;">          
+                                <div class="table-responsive " style="margin-top: 45px; height:300px; width: 98%;overflow:auto;">          
 
                                     <div id="table_row">
                                         <!--table data--> 
                                         <table id="myTable" class="table info">
                                             <thead>
                                                 <tr> 
-                                                    <th>ITEM</th> 
+                                                    <th style="width:200px;">ITEM</th> 
                                                     <th>QTY</th> 
                                                     <th>COST</th> 
                                                     <th>SELLING</th>  

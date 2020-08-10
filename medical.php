@@ -48,7 +48,7 @@
 						<div class="form-group">
 							<label class="col-md-5" for="txt_usernm">DATE</label>
 							<div class="col-md-6">
-								<input type="date"   value="<?php echo date('Y-m-d'); ?>"   id="sdate" class="form-control input-sm  ">
+								<input type="text"   value="<?php echo date('Y-m-d'); ?>"   id="sdate" class="form-control dt input-sm">
 							</div>
 						</div>
 					</div>
@@ -123,7 +123,7 @@
 					<div class="form-group">
 						<label class="col-md-3" for="txt_usernm">NEXT VISIT</label>
 						<div class="col-md-9">
-							<input type="date" placeholder="Next Date" id="ndate" class="form-control">
+							<input type="text" placeholder="Next Date" id="ndate" value="<?php echo date('Y-m-d'); ?>"  class="form-control dt">
 						</div>
 					</div> 
 					<div class="form-group">

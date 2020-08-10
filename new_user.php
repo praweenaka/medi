@@ -3,6 +3,7 @@
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">New User</h3>
+             <h4 style="float: right;height: 3px;"><b id="time"></b></h4>
         </div>
         <form role="form" class="form-horizontal">
             <div class="box-body">

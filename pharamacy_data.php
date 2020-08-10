@@ -162,7 +162,7 @@ if ($_POST["Command"] == "add_item") {
         
             $sql3 = "delete from tmp_pharmacy_item   where pharmcyno='".$_POST['pharmcyno']."' and tmp_no='".$_POST['uniq']."' and item='".$_POST['item']."'";
             $result3 = $conn->query($sql3);
-       		// $sql = "SELECT * FROM s_mas where code='" . $_POST['item'] . "' and qty>='".$_POST['qty']."'";  
+            //  $sql = "SELECT * FROM s_mas where code='" . $_POST['item'] . "' and qty>='".$_POST['qty']."'"; 
             $sql = "SELECT * FROM s_mas where code='" . $_POST['item'] . "'";  
             $result = $conn->query($sql);
             if ($row = $result->fetch()) {

@@ -61,12 +61,11 @@ function assign_dt() {
 }
 
 
-function getcode(cdata, cdata1, cdata2) {
+function getcode(cdata, cdata1) {
 
 
     document.getElementById('user_name').value = cdata;
-    document.getElementById('user_type').value = cdata1;
-    document.getElementById('user_type').value = cdata2; 
+    document.getElementById('user_type').value = cdata1; 
 // hide();
     window.scrollTo(0, 0);
     
@@ -235,15 +234,23 @@ function passsuppresult_save_inv()
  
 
 function deleteproduct() {
+    
+    
+    
     xmlHttp = GetXmlHttpObject();
     if (xmlHttp == null) {
         alert("Browser does not support HTTP Request");
         return;
     }
+    
+     var msg = confirm("Do you want to DELETE this ! ");
+        if (msg == true) {
     if (document.getElementById('user_name').value == "") {
         document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>User  Not Selected</span></div>";
         return false;
     }
+    
+    
 
     var url = "CheckUsers.php";
     url = url + "?Command=" + "delete";
@@ -254,6 +261,7 @@ function deleteproduct() {
     xmlHttp.onreadystatechange = dele;
     xmlHttp.open("GET", url, true);
     xmlHttp.send(null);
+        }  
 }
 
 function dele() {

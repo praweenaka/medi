@@ -23,7 +23,7 @@ if ($_GET["Command"] == "getdt") {
 
     $tmpinvno = "0000" . $no;
     $lenth = strlen($tmpinvno);
-    $no = trim("CUS/") . substr($tmpinvno, $lenth - 5);
+    $no = trim("SEN/") . substr($tmpinvno, $lenth - 5);
  
     $ResponseXML .= "<cust_txt><![CDATA[$no]]></cust_txt>";
     $ResponseXML .= "<uniq><![CDATA[$uniq]]></uniq>";

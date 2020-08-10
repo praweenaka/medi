@@ -41,11 +41,11 @@ include './connection_sql.php';
                 <div class="form-group"> 
                     <label class="col-sm-1 control-label" for="dtfrom">Date From</label>
                     <div class="col-sm-2">
-                        <input type="date" placeholder="Date" name="dtfrom" id="dtfrom" value="<?php echo date('Y-m-d'); ?>" class="form-control  input-sm">
+                        <input type="text" placeholder="Date" name="dtfrom" id="dtfrom" value="<?php echo date('Y-m-d'); ?>" class="form-control dt  input-sm">
                     </div> 
                     <label class="col-sm-1 control-label" for="dtto">Date To</label>
                     <div class="col-sm-2">
-                        <input type="date" placeholder="Date" name="dtto" id="dtto" value="<?php echo date('Y-m-d'); ?>" class="form-control  input-sm">
+                        <input type="text" placeholder="Date" name="dtto" id="dtto" value="<?php echo date('Y-m-d'); ?>" class="form-control dt  input-sm">
                     </div> 
                     <button type="submit" class="btn btn-primary" value="View"> View</button>
                 </div> 
@@ -64,11 +64,11 @@ include './connection_sql.php';
                 <div class="form-group"> 
                     <label class="col-sm-1 control-label" for="dtfrom">Date From</label>
                     <div class="col-sm-2">
-                        <input type="date" placeholder="Date" name="dtfrom" id="dtfrom" value="<?php echo date('Y-m-d'); ?>" class="form-control  input-sm">
+                        <input type="text" placeholder="Date" name="dtfrom" id="dtfrom" value="<?php echo date('Y-m-d'); ?>" class="form-control dt input-sm">
                     </div> 
                     <label class="col-sm-1 control-label" for="dtto">Date To</label>
                     <div class="col-sm-2">
-                        <input type="date" placeholder="Date" name="dtto" id="dtto" value="<?php echo date('Y-m-d'); ?>" class="form-control  input-sm">
+                        <input type="text" placeholder="Date" name="dtto" id="dtto" value="<?php echo date('Y-m-d'); ?>" class="form-control dt input-sm">
                     </div> 
                     <button type="submit" class="btn btn-primary" value="View"> View</button>
                 </div> 

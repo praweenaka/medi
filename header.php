@@ -7,75 +7,22 @@ if ((substr($_SERVER['REMOTE_ADDR'], 1, 9)) == "192.168.5") {
 }
 
 function get_title($url) {
-
-
-//    if ($url == "Approve_Security") {
-//        return 'Approve_Security';
-//        exit();
-//    }
-
-
-    if ($url == "food_MenuMaster") {
-        return 'food MenuMaster';
-        exit();
-    }
-    if ($url == "food_MenuMasterVIP") {
-        return 'food MenuMaster VIP';
-        exit();
-    }
-    if ($url == "kod_register") {
-        return 'kod Register';
-        exit();
-    }
-    if ($url == "kotEntry") {
-        return 'Kot Entry';
-        exit();
-    }
-    if ($url == "payment") {
-        return 'Report';
-        exit();
-    }
-    if ($url == "kot_Approval") {
-        return 'Kot Approval';
-        exit();
-    }
-    if ($url == "Receipt") {
-        return 'Receipt';
-        exit();
-    }
-    if ($url == "repo_all") {
-        return 'Report All';
-        exit();
-    }
-    if ($url == "new_user") {
-        return 'New User';
-        exit();
-    }
-    if ($url == "user_p") {
-        return 'User Permission';
-        exit();
-    }
-    if ($url == "food_MenuMasterSpecial") {
-        return 'Food Menu Master Special';
-        exit();
-    }
-    if ($url == "approve_by") {
-        return 'Approve By';
-        exit();
-    }
-    if ($url == "approve_by_canteen") {
-        return 'Approve By Canteen';
-        exit();
-    }
+ 
+        //   if ($url == "kot_Approval") {
+        //         return 'Kot Approval';
+        //         exit();
+        //     }
+        return 'SENIMRO';
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        
 
         <title><?php echo get_title($_GET['url']); ?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap_custom.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap-multiselect.css">
@@ -93,7 +40,7 @@ function get_title($url) {
         <link rel="stylesheet" href="plugins/morris/morris.css">
 
         <!-- Date Picker -->
-        <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+        <!--<link rel="stylesheet" href="plugins/datepicker/datepicker3.css">-->
 
         <!-- For Jason Table -->
 
@@ -112,7 +59,7 @@ function get_title($url) {
 
             <header class="main-header">
                 <!-- Logo -->
-                <a style="font-size: 12px;" href="home.php" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> <span class="logo-mini"><b></b></span> <!-- logo for regular state and mobile devices --> <span class="logo-lg"><b>Medi</b></span>Medi</a>
+                <a style="font-size: 12px;" href="home.php" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> <span class="logo-mini"><b></b></span> <!-- logo for regular state and mobile devices --> <span class="logo-lg"><b>SENIMRO</b></span>SENIMRO</a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button-->
@@ -178,18 +125,14 @@ function get_title($url) {
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <!--<img src="" class="img-circle" alt="User Image">-->
+                          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
-                            <p>
-                                <?php
-                                echo $_SESSION['UserName'];
-                                ?>
-                            </p>
-                            <br>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                          <p><?php echo $_SESSION['UserName']; ?></p>
+                          <!-- Status -->
+                          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
-                    </div>
+                      </div>
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">

@@ -1,5 +1,4 @@
-<!-- Main content -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Main content --> 
 <section class="content-header">
 
     <h1>
@@ -41,7 +40,7 @@
             echo"<div class=\"inner\">";
 
             echo"<h3 style=\"display: inline-block;
-  width: 100%;\"><a href='home.php?url=" . trim($row1['name']) . "' style=\"color: white; font-size:30PX;font-family: Verdana,Sans-serif;\" class=\"small-box-footer\">" . trim($row1['docname']) . "</a></h3></font>";
+  width: 100%;\"><a href='home.php?url=" . trim($row1['name']) . "' style=\"color: white; font-size:25PX;font-family: Verdana,Sans-serif;\" class=\"small-box-footer\">" . trim($row1['docname']) . "</a></h3></font>";
 
             
 

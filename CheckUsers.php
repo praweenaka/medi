@@ -16,10 +16,9 @@ if ($Command == "CheckUsers") {
     $ResponseXML = "";
     $ResponseXML .= "<salesdetails>";
     $UserName = $_GET["UserName"];
-    $Password = $_GET["Password"];
-//    $ResponseXML .= "<action><![CDATA[" . $_GET['action'] . "]]></action>";
-//    $ResponseXML .= "<form><![CDATA[" . $_GET['form'] . "]]></form>";
-    $sql = "SELECT * FROM user_mast WHERE user_name =  '" . $UserName . "' and password =  '" . $Password . "' ";
+    $Password = $_GET["Password"]; 
+    
+    $sql = "SELECT * FROM user_mast WHERE user_name =  '" . $UserName . "' and password = '" . md5($Password) . "' ";
     $result = $conn->query($sql);
 
     if ($row = $result->fetch()) {
@@ -40,7 +39,7 @@ if ($Command == "CheckUsers") {
         //setcookie($cookie_name, $cookie_value, time() + (43200)); // 86400 = 1 day
 
         $token = substr(hash('sha512', mt_rand() . microtime()), 0, 50);
-        $extime = time() + 43200;
+        $extime = time() + 100000;
 
 
         $domain = $_SERVER['HTTP_HOST'];
@@ -54,10 +53,13 @@ if ($Command == "CheckUsers") {
         echo $action;
 
 
-        $time = mktime(date('h'), date('i'), date('s'));
-        $time = date("g.i a");
+       $time = date("H:i:s");
+        // $time = date("g.i a");
         $today = date('Y-m-d');
-        clearstatcache();
+        
+         $sql = "Insert into loging(Name,Date,Logon_Time,Sessioan_Id,ip) values ('" . $UserName . "','" . $today . "','" . $time . "','" . $_SESSION['sessionId'] . "','" . $ip . "')";
+        $conn->exec($sql);
+        // clearstatcache();
     } else {
         $action = "not";
         $ResponseXML .= "<stat><![CDATA[" . $action . "]]></stat>";
@@ -76,13 +78,13 @@ if ($_GET["Command"] == "save_inv") {
     if ($row1 = $result->fetch()) {
         echo "User Found !!!";
     } else {
-        $sql = "insert into user_mast(user_name,user_type, password) values ('" . $_GET["user_name"] . "', '" . $_GET["user_type"] . "', '" . $_GET["password"] . "')";
-//        echo $sql;
-        $result = $conn->query($sql);
-//        echo "Saved";
-
+        $sql = "insert into user_mast(user_name,user_type, password,password1) values ('" . $_GET["user_name"] . "', '" . $_GET["user_type"] . "','" . md5($_GET["password"]) . "', '" . $_GET["password"] . "')";
+ 
+        $result = $conn->query($sql); 
              echo "Saved";
-        
+             
+         $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_GET['user_name'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'USER', 'SAVE', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+         $result2 = $conn->query($sql2);
     }
 }
 
@@ -92,10 +94,25 @@ if ($Command == "logout") {
     $domain = $_SERVER['HTTP_HOST'];
     setcookie('user', "", 1, "/", $domain);
 
+    try {
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn->beginTransaction();
+        $time = date("H:i:s");
+        $sql2 = "update loging set Logout_Time = '" . $time . "'  where Sessioan_Id = '" . $_SESSION['sessionId']. "'"; 
 
 
-    session_unset();
+        $result = $conn->query($sql2);
+
+        $conn->commit();
+        // echo "EDIT";
+    } catch (Exception $e) {
+        $conn->rollBack();
+        echo $e;
+    }
+     session_unset();
     session_destroy();
+
+   
 }
 
 
@@ -133,6 +150,9 @@ if ($_GET["Command"] == "delete") {
 
     $sql = "delete from user_mast where user_name = '" . $_GET['user_name'] . "'";
     $result = $conn->query($sql);
+    
+    $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_GET['user_name'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'USER', 'DELETE', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+         $result2 = $conn->query($sql2);
 
 //    $conn->commit();
     echo "Delete";

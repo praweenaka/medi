@@ -46,10 +46,15 @@ if ($_POST["Command"] == "save") {
             exit("Already Saved Item Name...!!!");
         }
         
-        $sqlsave = "Insert into s_mas(code,des,brand,country,user,datetime) values ('" . $_POST['code'] . "','" . $_POST['des'] . "','" . $_POST['brand1'] . "','" . $_POST['country'] . "','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."') ";
+        $sqlsave = "Insert into s_mas(code,des,brand,country,user,datetime,qty,cost,selling) values ('" . $_POST['code'] . "','" . $_POST['des'] . "','" . $_POST['brand1'] . "','" . $_POST['country'] . "','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."','" . $_POST['qty1'] . "','" . $_POST['cost1'] . "','" . $_POST['selling1'] . "') ";
         $resultsave = $conn->query($sqlsave);
         
-        $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" .  $_POST['code'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Item', 'Cancel', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+        $sqlsave1 = "Insert into s_trn(code,name,cost,selling,qty,note,subtot,user,datetime,type) values 
+        ('" . $_POST['code'] . "','" . $_POST['des'] . "','" . $_POST['cost1'] . "','" . $_POST['selling1'] . "','" . $_POST['qty1'] . "','stkup','".$_POST['cost1']*$_POST['qty1']."','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."','item') ";
+        $resultsave1 = $conn->query($sqlsave1);
+         
+        
+        $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" .  $_POST['code'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Item', 'SAVE', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
         $result2 = $conn->query($sql2);
             
         $sql = "UPDATE invpara set item=item+1";
@@ -63,6 +68,35 @@ if ($_POST["Command"] == "save") {
     }
 }
 
+if ($_POST["Command"] == "cancel_inv") {
+    try {
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn->beginTransaction();
+        $sql = "SELECT * from s_mas where code='" . $_POST['code'] . "'";
+ 
+        $sql = $conn->query($sql);
+        if ($row = $sql->fetch()) {
+
+             
+             $sql = "UPDATE s_mas set cancel='1' where code='" . $row['code'] . "'";
+            $result = $conn->query($sql);
+            
+            $sql1 = "UPDATE s_trn set cancel='1' where code='" . $row['code'] . "'";
+            $result1 = $conn->query($sql1);
+
+            $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_POST['id'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Item', 'Cancel', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+            $result2 = $conn->query($sql2);
+
+            $conn->commit();
+            echo "Cancel";
+        } else {
+            exit("Item  Not Found...!!!");
+        }
+    } catch (Exception $e) {
+        $conn->rollBack();
+        echo $e;
+    }
+}
 
 if ($_POST["Command"] == "removetreat") {
     try {
@@ -77,7 +111,7 @@ if ($_POST["Command"] == "removetreat") {
              $sql = "UPDATE s_mas set cancel='1' where code='" . $row['code'] . "'";
             $result = $conn->query($sql);
 
-            $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_POST['id'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Item', 'Cancel', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+            $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_POST['id'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'ItemPur', 'Cancel', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
             $result2 = $conn->query($sql2);
 
             $conn->commit();
@@ -90,6 +124,9 @@ if ($_POST["Command"] == "removetreat") {
         echo $e;
     }
 }
+
+  
+ 
 
 if ($_POST["Command"] == "addorder") {
 
@@ -121,7 +158,7 @@ if ($_POST["Command"] == "addorder") {
         $sqlsave = "Insert into s_trn(code,name,cost,selling,qty,subtot,s_code,user,datetime,type) values ('" . $_POST['item'] . "','" . $rowmas['des'] . "','" . $_POST['cost'] . "','" . $_POST['selling'] . "','" . $_POST['qty'] . "','" . $_POST['qty']*$_POST['cost'] . "','" . $_POST['s_code'] . "','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."','item') ";
         $resultsave = $conn->query($sqlsave);
  
-        $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_POST['item'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Order', 'Save', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+        $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_POST['item'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'ItemPur', 'Save', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
         $result2 = $conn->query($sql2);
             
         $conn->commit();
@@ -132,35 +169,7 @@ if ($_POST["Command"] == "addorder") {
     }
 }
   
-  
-if ($_POST["Command"] == "removetreat") {
-    try {
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $conn->beginTransaction();
-        $sql = "SELECT * from s_trn where id='" . $_POST['id'] . "'";
- 
-        $sql = $conn->query($sql);
-        if ($row = $sql->fetch()) {
 
-            $sql = "UPDATE s_trn set cancel='1' where id='" . $_POST['id'] . "'";
-            $result = $conn->query($sql);
-            
-             $sql = "UPDATE s_mas set cost=costold,selling=sellingold,qty=qty-'".$row['qty']."' where code='" . $row['code'] . "'";
-            $result = $conn->query($sql);
-
-            $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_POST['id'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Order', 'Cancel', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
-            $result2 = $conn->query($sql2);
-
-            $conn->commit();
-            echo "Cancel";
-        } else {
-            exit("Item Name Not Found...!!!");
-        }
-    } catch (Exception $e) {
-        $conn->rollBack();
-        echo $e;
-    }
-}
 
 
 

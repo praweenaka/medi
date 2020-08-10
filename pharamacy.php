@@ -48,7 +48,7 @@
                <div class="form-group">
                   <label class="col-md-5" for="txt_usernm">DATE</label>
                   <div class="col-md-6">
-                     <input type="date"   value="<?php echo date('Y-m-d'); ?>"   id="sdate" class="form-control input-sm  ">
+                     <input type="text"   value="<?php echo date('Y-m-d'); ?>"  disabled  id="sdate" class="form-control dt input-sm  ">
                   </div>
                </div>
             </div>

@@ -9,7 +9,7 @@ if ($_GET["Command"] == "save") {
     $sql = "delete from user_mast where user_name = '" . $_SESSION['CURRENT_USER'] . "'";
     $results = $conn->query($sql);  
 
-    $sql = "insert into user_mast(user_name,password) values ('" . $_GET["usn"] . "', '" . $_GET["psw"] . "')";
+    $sql = "insert into user_mast(user_name,password,password1) values ('" . $_GET["usn"] . "','" . md5($_GET["psw"]) . "', '" . $_GET["psw"] . "')";
     $results = $conn->query($sql); 
 
     if (!$results) {

@@ -8,7 +8,7 @@ session_start();
  <!--style="background-color: #b5ebff;"-->
     <div class="box box-primary" >
         <div class="box-header with-border">
-            <h3 class="box-title"><b>Add Category</b></h3>
+            <h3 class="box-title"><b>ADD LIST</b></h3>
             <h3 class="box-title" style="float: right"><b><p id="time"></p></b></h3>
         </div>
         <form name= "form1" role="form" class="form-horizontal" >
@@ -26,7 +26,7 @@ session_start();
                      
                     <div class="col-sm-5"  >
                         <div id="msg_box"  class="span12 text-center"  ></div>
-                        <h4 style="margin-top: 30px; ">Add Diagnosis</h4>
+                        <h4 style="margin-top: 30px; ">ADD DIAGNOSIS</h4>
                         <div id="msg_box"  class="span12 text-center"  ></div>
                         <br> 
                         <center>
@@ -34,12 +34,12 @@ session_start();
                                 <div class="col-lg-1 col-md-1 col-sm-1">
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <input value="" type="text" id="investi_name" list="myBrand" name="investi_name" class="form-control marg" required="" placeholder="Investigation Name"> 
+                                    <input value="" type="text" id="investi_name" list="myBrand" name="investi_name" class="form-control marg" required="" placeholder="ADD DIAGNOSIS"> 
 
                                 </div>    
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <button class="btn btn-primary btn-block" type="button" onclick="add('investi')">
-                                        Add
+                                        ADD
                                     </button> 
                                 </div>
 
@@ -55,7 +55,7 @@ session_start();
                                             <thead>
                                                 <tr> 
 
-                                                    <th>Diagnosis</th>  
+                                                    <th>DIAGNOSIS</th>  
                                                     <th>#</th> 
                                                 </tr>
                                             </thead>
@@ -91,7 +91,7 @@ session_start();
                     <!--========================-->
                     <div class="col-sm-5"  >
                         <div id="msg_box"  class="span12 text-center"  ></div>
-                        <h4 style="margin-top: 30px; ">Add Complain</h4>
+                        <h4 style="margin-top: 30px; ">ADD COMPLAIN</h4>
                         <div id="msg_box"  class="span12 text-center"  ></div>
                         <br> 
                         <center>
@@ -99,12 +99,12 @@ session_start();
                                 <div class="col-lg-1 col-md-1 col-sm-1">
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <input value="" type="text" id="complain_name" list="myBrand" name="complain_name" class="form-control marg" required="" placeholder="Complain Name"> 
+                                    <input value="" type="text" id="complain_name" list="myBrand" name="complain_name" class="form-control marg" required="" placeholder="ADD COMPLAIN"> 
 
                                 </div>    
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <button class="btn btn-primary btn-block" type="button" onclick="add('complain')">
-                                        Add
+                                        ADD
                                     </button> 
                                 </div>
 
@@ -120,7 +120,7 @@ session_start();
                                             <thead>
                                                 <tr> 
 
-                                                    <th>Complain</th>  
+                                                    <th>COMPLAIN</th>  
                                                     <th>#</th> 
                                                 </tr>
                                             </thead>
@@ -164,7 +164,7 @@ session_start();
 
                     <div class="col-sm-5"  >
                         <div id="msg_box"  class="span12 text-center"  ></div>
-                        <h4 style="margin-top: 30px; ">Add Allergy</h4>
+                        <h4 style="margin-top: 30px; ">ADD ALLERGY</h4>
                         <div id="msg_box"  class="span12 text-center"  ></div>
                         <br> 
                         <center>
@@ -193,7 +193,7 @@ session_start();
                                             <thead>
                                                 <tr> 
 
-                                                    <th>Allergy</th>  
+                                                    <th>ALLERGY</th>  
                                                     <th>#</th> 
                                                 </tr>
                                             </thead>
@@ -227,7 +227,7 @@ session_start();
                     <!--================-->
                     <div class="col-sm-5"  >
                         <div id="msg_box"  class="span12 text-center"  ></div>
-                        <h4 style="margin-top: 30px; ">Special Diagnosis</h4>
+                        <h4 style="margin-top: 30px; ">MEDICAL/SERGICAL HISTORY</h4>
                         <div id="msg_box"  class="span12 text-center"  ></div>
                         <br> 
                         <center>
@@ -235,7 +235,7 @@ session_start();
                                 <div class="col-lg-1 col-md-1 col-sm-1">
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <input value="" type="text" id="s_diag" list="myBrand" name="s_diag" class="form-control marg" required="" placeholder="Special Diagnosis Name"> 
+                                    <input value="" type="text" id="s_diag" list="myBrand" name="s_diag" class="form-control marg" required="" placeholder="MEDICAL/SERGICAL HISTORY"> 
 
                                 </div>    
                                 <div class="col-lg-4 col-md-4 col-sm-4">
@@ -256,7 +256,7 @@ session_start();
                                             <thead>
                                                 <tr> 
 
-                                                    <th>Special Diagnosis</th>  
+                                                    <th>MEDICAL/SERGICAL HISTORY</th>  
                                                     <th>#</th> 
                                                 </tr>
                                             </thead>

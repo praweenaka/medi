@@ -81,13 +81,13 @@ include_once './footer.php';
 <script src="bootstrap/js/bootstrap-multiselect.js"></script>
 <script  type="text/javascript">
 
-    $(function () {
+    // $(function () {
 
-    $(document).ready(function () {
-            $('#brand').multiselect();
-    });
+    // $(document).ready(function () {
+    //         $('#brand').multiselect();
+    // });
  
-    });
+    // });
 
 </script>
 <script type="text/javascript">
@@ -111,8 +111,8 @@ include './autocomple_gl.php';
 
 <!-- FastClick -->
 <script src="plugins/fastclick/fastclick.js"></script>   <!-- minified -->
-<script src="plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
-<script src="plugins/recaptcha_4.2.0/index.php"></script>
+<!--<script src="plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>-->
+<!--<script src="plugins/recaptcha_4.2.0/index.php"></script>-->
 <script>
 
 // $(function() {

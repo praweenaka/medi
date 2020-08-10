@@ -121,7 +121,10 @@ function save_inv()
              params=params+"&uniq="+document.getElementById('uniq').value;   
              params=params+"&des="+document.getElementById('des').value;   
              params=params+"&brand1="+document.getElementById('brand1').value;   
-             params=params+"&country="+document.getElementById('country').value;    
+             params=params+"&country="+document.getElementById('country').value;
+             params=params+"&cost1="+document.getElementById('cost1').value;  
+             params=params+"&selling1="+document.getElementById('selling1').value;  
+             params=params+"&qty1="+document.getElementById('qty1').value;  
 			   
 			xmlHttp.open("POST", url, true);
 

@@ -113,7 +113,7 @@ if (isset($_COOKIE[$cookie_name])) {
                        <img src="img/logo.jpg"   class="img-fluid" style="width:100%; ">
                    </div>
                     <div style="margin-top: 60px;margin:  20px;" >
-                   <p><span class="letter-red">C</span>apital. <span class="letter-red">W</span>eb. <span class="letter-red">S</span>olutions.</p>
+                   <p><span class="letter-red">C</span>apital<span class="letter-red">W</span>eb <span class="letter-red">S</span>olutions</p>
                    </div>
                 </div>
                
