@@ -134,121 +134,38 @@ session_start();
 						</div>
 					</div>
 					<!--================================-->
-					<div class="col-md-4 ">
+					<div class="col-md-5  ">
+						<!--===================-->
 
-						<div class="tab-content">
-							<div id="invoices" class="tab-pane fade in active">
-								<h3>EXAMINATION</h3> 
-								<!-- =============================================== -->
-								<div class="col-md-12">
-
-									<div class="form-group">
-										<label class="col-md-3" for="c_code">GENERAL</label>
-										<div class="col-md-9">
-											<select name="general" id="general" style="width: 100%"  multiple="multiple"  class="form-control input-sm"> 
-												<?php
-												require_once("./connection_sql.php");
-												$sql = "Select * from complain  where cancel ='0'";
-												foreach ($conn->query($sql) as $row) {
-													echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
-												}
-												?>
-											</select>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label class="col-md-3" for="c_code">CVS</label>
-										<div class="form-row">
-											<div class="form-group col-md-5">
-												<label for="inputEmail4">HR</label>
-												<input type="number" class="form-control" id="inputEmail4" placeholder="HR">
-											</div>
-											<div class="form-group col-md-5">
-												<label for="inputPassword4">BP</label>
-												<input type="number" class="form-control" id="inputPassword4" placeholder=" BP">
-											</div>
-										</div> 
-									</div>
-									<div class="form-group">
-										<label class="col-md-3" for="c_code"> </label>
-										<div class="form-row">
-											<div class="form-group col-md-5">
-												<label for="inputEmail4">DR</label>
-												<input type="radio" class="form-check-label" id="cvs" placeholder="HR">
-											</div>
-											<div class="form-group col-md-5">
-												<label for="inputPassword4">MURMER</label>
-												<input type="radio" class="form-check-label" id="cvs" placeholder=" BP">
-											</div>
-										</div> 
-									</div>
-									<div class="form-group">
-										<label class="col-md-4" for="c_code">RESPINATORY </label>
-										<div class="form-row">
-											<div class="form-group col-md-6">
-												<label for="inputEmail4">RR</label>
-												<input type="text" class="form-control" id="inputEmail4" placeholder="RR">
-											</div>
-											 
-										</div> 
-									</div>
-									<div class="form-group">
-										<label class="col-md-4" for="c_code"></label>
-										<div class="form-row">
-											<div class="form-group col-md-3">
-												<label for="inputPassword4">SCR</label>
-												<input type="radio" class="form-check-label" id="cvs" placeholder="SCR">
-											</div>
-											<div class="form-group col-md-4">
-												<label for="inputEmail4">DYSPNEA</label>
-												<input type="radio" class="form-check-label" id="cvs" placeholder="DYSPNEA">
-											</div>
-											<div class="form-group col-md-3">
-												<label for="inputPassword4">ICR</label>
-												<input type="radio" class="form-check-label" id="cvs" placeholder="ICR">
-											</div>
-										</div> 
-									</div>
-
-								</div>
-								<!-- =========================================== -->
-							</div>
-						</div>
-
-
-					</div>
-					<!--========================================-->
-					<!-- ====================================== -->
-
-
-					<div class="col-md-4 ">
+						
 						<div class="tab-content">
 							<div id="invoices" class="tab-pane fade in active">
 								<h3>TREATMENT</h3>
 								<input type="hidden" value="3"  id="count" >
 								<form role="form" class="form-horizontal">
 									<div id='invdt' class="box-body">
+										<div class="form-group"> 
+											<div class="col-md-6">
+												<select name="item" id="item" class="form-control input-sm" >
+													<?php
+													require_once("./connection_sql.php");
+													$sql = "Select * from s_mas  where cancel ='0'";
+													foreach ($conn->query($sql) as $row) {
+														echo "<option value='" . $row["code"] . "'>" . $row["des"] . "-" . $row["selling"] . "-" . $row["qty"] . "</option>";
+													}
+													?> 
+												</select>  
+											</div> 
+											<div class="col-md-3">
+												<input   type="number" id="qty"   name="qty" class="form-control  "  placeholder="Qty"> 
+											</div> 
+											<div class="col-sm-2">
+												<button class="btn btn-primary btn-block" type="button" onclick="add()">
+													Add
+												</button> 
+											</div>
 
-										<div class="col-md-12">
-											<select name="item" id="item" class="form-control input-sm" >
-												<?php
-												require_once("./connection_sql.php");
-												$sql = "Select * from s_mas  where cancel ='0'";
-												foreach ($conn->query($sql) as $row) {
-													echo "<option value='" . $row["code"] . "'>" . $row["des"] . "-" . $row["selling"] . "-" . $row["qty"] . "</option>";
-												}
-												?> 
-											</select>   
-											<div class="form-group"></div>
-											<input   type="number" id="qty"   name="qty" class="form-control  "  placeholder="Qty"> 
-											<div class="form-group"></div>
-											<button class="btn btn-primary btn-block" type="button" onclick="add()">
-												Add
-											</button> 
 										</div>
-
-
 
 										<div class="row">
 											<div class="table-responsive " style="  height:220px; width: 100%;overflow:auto;">          
@@ -260,15 +177,25 @@ session_start();
 									</div>
 								</form>
 							</div>
-						</div>
+						</div>    
+
+					</div>
+					<!--========================================-->
+					<!-- ====================================== -->
+
+
+					<div class="col-md-3">
+						<div id="itemdetails1" style="height: 80px;"></div>  
+						<div id="itemdetails2" style="height: 80px;"></div>  
 
 					</div>
 					<!--=====================-->
 
 					<!-- ////////////////////////////////////////// -->
-					<div class="container col-md-8">
+					<div class="container col-md-9">
 						<ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#report">GENERAL</a></li>
+							<li class="active"><a data-toggle="tab" href="#report7">EXAMINATION</a></li>
+							<li><a data-toggle="tab" href="#report">GENERAL</a></li>
 							<li><a data-toggle="tab" href="#report1">RENAL/UROLOGY</a></li>
 							<li><a data-toggle="tab" href="#report2">CHOLESTEROL</a></li>
 							<li><a data-toggle="tab" href="#report3">DIABETES</a></li>
@@ -277,7 +204,147 @@ session_start();
 							<li><a data-toggle="tab" href="#report6">SPECIAL</a></li>
 						</ul>
 						<div class="tab-content ">
-							<div id="report" class="tab-pane fade in active">
+							<div id="report7" class="tab-pane fade in active">
+								<!--<h3>Report</h3>-->
+								<input type="hidden" value="3"  id="count" >
+								<form role="form" class="form-horizontal">
+									<div id='invdt' class="box-body"> 
+										
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="col-md-3" for="c_code">GENERAL</label>
+												<div class="col-md-9">
+													<select name="general" id="general" style="width: 100%"  multiple="multiple"  class="form-control input-sm"> 
+														<?php
+														require_once("./connection_sql.php");
+														$sql = "Select * from complain  where cancel ='0'";
+														foreach ($conn->query($sql) as $row) {
+															echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
+														}
+														?>
+													</select>
+												</div>
+											</div> 
+											<div class="form-group">
+												<label class="col-md-3" for="c_code">CVS</label>
+												<div class="form-row">
+													<div class="form-group col-md-5">
+														<label for="inputEmail4">HR</label>
+														<input type="number" class="form-control" id="hr" placeholder="HR">
+													</div>
+													<div class="form-group col-md-5">
+														<label for="inputPassword4">BP</label>
+														<input type="number" class="form-control" id="bp" placeholder=" BP">
+													</div>
+												</div> 
+											</div>
+											<div class="form-group">
+												<label class="col-md-3" for="c_code"> </label>
+												<div class="form-row">
+													<div class="form-group col-md-5">
+														<label for="inputEmail4">DR</label>
+														<input type="radio" class="form-check-label" id="cvs" placeholder="HR">
+													</div>
+													<div class="form-group col-md-5">
+														<label for="inputPassword4">MURMER</label>
+														<input type="radio" class="form-check-label" id="cvs" placeholder=" BP">
+													</div>
+												</div> 
+											</div>
+											<div class="form-group">
+												<label class="col-md-3" for="txt_usernm">RESPINATORY</label>
+												<div class="col-md-9">
+													<input type="text" placeholder="RESPINATORY" id="respina" class="form-control">
+												</div>
+											</div> 
+											<div class="form-row">
+												<label class="col-md-3" for="txt_usernm"></label>
+												<div class="form-group col-md-3">
+													<label for="inputEmail4">SCR</label>
+													<input type="radio" class="form-check-label" id="scr" placeholder="SCR">
+												</div>
+												<div class="form-group col-md-4">
+													<label for="inputPassword4">DYSPNEA</label>
+													<input type="radio" class="form-check-label" id="dyspnea" placeholder="DYSPNEA">
+												</div>
+												<div class="form-group col-md-2">
+													<label for="inputPassword4">ICR</label>
+													<input type="radio" class="form-check-label" id="icr" placeholder="ICR">
+												</div>
+											</div> 
+
+										</div>
+										<!-- ======== -->
+										<div class="col-md-6  ">
+											<div class="form-group">
+												<label class="col-md-3" for="c_code">LUNGS</label>
+												<div class="col-md-9">
+													<select name="lungs" id="lungs" style="width: 100%"  multiple="multiple"  class="form-control input-sm"> 
+														<?php
+														require_once("./connection_sql.php");
+														$sql = "Select * from complain  where cancel ='0'";
+														foreach ($conn->query($sql) as $row) {
+															echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
+														}
+														?>
+													</select>
+												</div>
+											</div> 
+											<div class="form-group">
+												<label class="col-md-3" for="c_code">ABDOMEN</label>
+												<div class="col-md-9">
+													<select name="abdomen" id="abdomen" style="width: 100%"  multiple="multiple"  class="form-control input-sm"> 
+														<?php
+														require_once("./connection_sql.php");
+														$sql = "Select * from complain  where cancel ='0'";
+														foreach ($conn->query($sql) as $row) {
+															echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
+														}
+														?>
+													</select>
+												</div>
+											</div> 
+											<div class="form-group">
+												<label class="col-md-3" for="c_code">CNS</label>
+												<div class="col-md-9">
+													<select name="cns" id="cns" style="width: 100%"  multiple="multiple"  class="form-control input-sm"> 
+														<?php
+														require_once("./connection_sql.php");
+														$sql = "Select * from complain  where cancel ='0'";
+														foreach ($conn->query($sql) as $row) {
+															echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
+														}
+														?>
+													</select>
+												</div>
+											</div> 
+											<div class="form-group">
+												<label class="col-md-3" for="txt_usernm">THROAT</label>
+												<div class="col-md-9">
+													<input type="text" placeholder="THROAT" id="throat" class="form-control">
+												</div>
+											</div> 
+											<div class="form-group">
+												<label class="col-md-3" for="c_code">EAR</label>
+												<div class="form-row">
+													<div class="form-group col-md-5">
+														<label for="inputEmail4">L</label>
+														<input type="number" class="form-control" id="ear_l" placeholder="L">
+													</div>
+													<div class="form-group col-md-5">
+														<label for="inputPassword4">R</label>
+														<input type="number" class="form-control" id="ear_r" placeholder="R">
+													</div>
+												</div> 
+											</div>
+										</div>
+										<!-- ========= -->
+									</div>
+								</form>
+							</div>
+
+							<!-- ===================================================== -->
+							<div id="report" class="tab-pane fade in ">
 								<!--<h3>Report</h3>-->
 								<input type="hidden" value="3"  id="count" >
 								<form role="form" class="form-horizontal">
@@ -567,13 +634,11 @@ session_start();
 							
 						</div>
 					</div>  
-					<div class="col-md-4">
-						<div id="itemdetails1" style="height: 80px;"></div>  
-						<div id="itemdetails2" style="height: 80px;"></div>  
+					<div class="col-md-3">
 						<figure class="highcharts-figure" >
 							<div id="container" style="height: 350px;"></div>
 							<p class="highcharts-description">
-								
+
 							</p>
 						</figure>
 					</div>
