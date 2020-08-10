@@ -59,8 +59,8 @@ if ($operation == "SAVE") {
              $flg=0;
          }
            
-         $sqlsave = "Insert into medical(uniq,medino,cuscode,cusname,sdate,investi,complain,note,user,datetime,flag,ndate,fbc,wbc,hb,plt,pcv,esp,crp,ufr,screa,bu,se,psa,total,tg,hdl,ldl,vldl,ratio,fbs,rbs,hbalc,uma,sgpt,sgop,ggt,sbili,salmu,tsh,t4,ecg,weight,height,pr,bp,to1) values
-         ('".$cols[uniq]."','".$cols[medino]."','".$cols[code]."','".$row1['name']."','".$cols[sdate]."','".implode(", ", $cols[investi])."','".implode(", ", $cols[complain])."','".$cols[note]."','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."','".$flg."','".$cols[ndate]."','".$cols[fbc]."','".$cols[wbc]."','".$cols[hb]."','".$cols[plt]."','".$cols[pcv]."','".$cols[esp]."','".$cols[crp]."','".$cols[ufr]."','".$cols[screa]."','".$cols[bu]."','".$cols[se]."','".$cols[psa]."','".$cols[total]."','".$cols[tg]."','".$cols[hdl]."','".$cols[ldl]."','".$cols[vldl]."','".$cols[ratio]."','".$cols[fbs]."','".$cols[rbs]."','".$cols[hbalc]."','".$cols[uma]."','".$cols[sgpt]."','".$cols[sgop]."','".$cols[ggt]."','".$cols[sbili]."','".$cols[salmu]."','".$cols[tsh]."','".$cols[t4]."','".$cols[ecg]."','".$cols[weight]."','".$cols[height]."','".$cols[pr]."','".$cols[bp]."','".$cols[to]."') ";
+         $sqlsave = "Insert into medical(uniq,medino,cuscode,cusname,sdate,investi,complain,note,user,datetime,flag,ndate,fbc,wbc,hb,plt,pcv,esp,crp,ufr,screa,bu,se,psa,total,tg,hdl,ldl,vldl,ratio,fbs,rbs,hbalc,uma,sgpt,sgop,ggt,sbili,salmu,tsh,t4,ecg,weight,height,pr,bp,to1,hr,bp1,respina,throat,ear_l,ear_r,general,lungs,abdomen,cns,respinacheck,cvscheck) values
+         ('".$cols[uniq]."','".$cols[medino]."','".$cols[code]."','".$row1['name']."','".$cols[sdate]."','".implode(", ", $cols[investi])."','".implode(", ", $cols[complain])."','".$cols[note]."','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."','".$flg."','".$cols[ndate]."','".$cols[fbc]."','".$cols[wbc]."','".$cols[hb]."','".$cols[plt]."','".$cols[pcv]."','".$cols[esp]."','".$cols[crp]."','".$cols[ufr]."','".$cols[screa]."','".$cols[bu]."','".$cols[se]."','".$cols[psa]."','".$cols[total]."','".$cols[tg]."','".$cols[hdl]."','".$cols[ldl]."','".$cols[vldl]."','".$cols[ratio]."','".$cols[fbs]."','".$cols[rbs]."','".$cols[hbalc]."','".$cols[uma]."','".$cols[sgpt]."','".$cols[sgop]."','".$cols[ggt]."','".$cols[sbili]."','".$cols[salmu]."','".$cols[tsh]."','".$cols[t4]."','".$cols[ecg]."','".$cols[weight]."','".$cols[height]."','".$cols[pr]."','".$cols[bp]."','".$cols[to]."','".$cols[hr]."','".$cols[bp1]."','".$cols[respina]."','".$cols[throat]."','".$cols[ear_l]."','".$cols[ear_r]."','".implode(", ", $cols[general])."','".implode(", ", $cols[lungs])."','".implode(", ", $cols[abdomen])."','".implode(", ", $cols[cns])."','".$cols[respinacheck]."','".$cols[cvscheck]."') ";
        $resultsave = $conn->query($sqlsave);
 
         
@@ -340,7 +340,7 @@ if ($_POST["Command"] == "addtreat") {
         $row = $result->fetch();
         
         $sql = "Insert into tmp_treat (item,name,qty,tmp_no,medino,user)values
-    			('" . $_POST['item'] . "','" . $row['des'] . "', '" . $_POST['qty'] . "', '" . $_POST['uniq'] . "','" . $_POST['medino'] . "','" . $_SESSION["CURRENT_USER"] . "') ";
+          ('" . $_POST['item'] . "','" . $row['des'] . "', '" . $_POST['qty'] . "', '" . $_POST['uniq'] . "','" . $_POST['medino'] . "','" . $_SESSION["CURRENT_USER"] . "') ";
      
         $result = $conn->query($sql);
  

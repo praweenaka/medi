@@ -75,10 +75,27 @@ function new_ent() {
     document.getElementById('pr').value="";
     document.getElementById('bp').value="";
     document.getElementById('to').value="";
-    // $("#name").select2('val','');
-    // $("#item").select2('val','');
-    // $("#investi").select2('val','');
-    // $("#complain").select2('val','');
+    $("#name").select2('val','');
+    $("#item").select2('val','');
+    $("#investi").select2('val','');
+    $("#complain").select2('val','');
+    
+    $("#general").select2('val','');
+    $("#lungs").select2('val','');
+    $("#abdomen").select2('val','');
+    $("#cns").select2('val','');
+    
+    document.getElementById('hr').value="";
+    document.getElementById('bp1').value="";
+    document.getElementById('respina').value="";
+    document.getElementById('throat').value="";
+    document.getElementById('ear_l').value="";
+    document.getElementById('ear_r').value=""; 
+    document.getElementById("scr").checked = false;
+    document.getElementById("dyspnea").checked = false;
+    document.getElementById("icr").checked = false;
+    document.getElementById("dr").checked = false;
+    document.getElementById("mumber").checked = false;
     
     document.getElementById('container').innerHTML="";
     document.getElementById('itemdetails').innerHTML="";
@@ -296,14 +313,28 @@ function save_inv() {
         return false;
     }
 
-    // var sex="";
-    // if(document.getElementById("male").checked){
-    //     sex="Male";
-    // }else{
-    //     sex="FeMale";
-    // }  
+    var respinacheck="";
+    if(document.getElementById("scr").checked){
+        respinacheck="scr";
+    }else if(document.getElementById("dyspnea").checked){
+        respinacheck="dyspnea";
+    }else if(document.getElementById("scr").checked){
+        respinacheck="icr";
+    } 
+    
+    var cvscheck="";
+    if(document.getElementById("dr").checked){
+        cvscheck="dr";
+    }else if(document.getElementById("mumber").checked){
+        cvscheck="mumber";
+    } 
+    
     var investi = $('#investi').val();
     var complain = $('#complain').val();
+    var general = $('#general').val();
+    var lungs = $('#lungs').val();
+    var abdomen = $('#abdomen').val();
+    var cns = $('#cns').val();
     
 
     var obj = {
@@ -357,9 +388,20 @@ function save_inv() {
             "pr":document.getElementById('pr').value,
             "bp":document.getElementById('bp').value,
             "to":document.getElementById('to').value,
+            "hr":document.getElementById('hr').value,
+            "bp1":document.getElementById('bp1').value,
+            "respina":document.getElementById('respina').value,
+            "throat":document.getElementById('throat').value,
+            "ear_l":document.getElementById('ear_l').value,
+            "ear_r":document.getElementById('ear_r').value,
             "investi":investi, 
             "complain":complain,  
-            // "sex":sex,    
+            "general":general,  
+            "lungs":lungs,  
+            "abdomen":abdomen,  
+            "cns":cns,  
+            "respinacheck":respinacheck,    
+            "cvscheck":cvscheck,    
         }
 
     };
@@ -427,8 +469,12 @@ function passcusresult_quot()
         opener.document.getElementById('sdate').value = obj.sdate; 
         opener.document.getElementById('ndate').value = obj.ndate;  
         // opener.document.getElementById('note').innerHTML. = obj.note; 
-         // opener.document.getElementById('investi').innerHTML. = obj.investi; 
-          // opener.document.getElementById('complain').innerHTML. = obj.complain; 
+        // opener.document.getElementById('investi').innerHTML. = obj.investi; 
+        // opener.document.getElementById('complain').innerHTML. = obj.complain; 
+        // opener.document.getElementById('general').innerHTML. = obj.general; 
+        // opener.document.getElementById('lungs').innerHTML. = obj.lungs; 
+        // opener.document.getElementById('abdomen').innerHTML. = obj.abdomen; 
+        // opener.document.getElementById('cns').innerHTML. = obj.cns; 
         
         opener.document.getElementById('fbc').value = obj.fbc;
         opener.document.getElementById('wbc').value = obj.wbc;
@@ -466,6 +512,31 @@ function passcusresult_quot()
         opener.document.getElementById('bp').value = obj.bp;
         opener.document.getElementById('to').value = obj.to1;
         
+        opener.document.getElementById('hr').value = obj.hr;
+        opener.document.getElementById('bp1').value = obj.bp1;
+        opener.document.getElementById('respina').value = obj.respina;
+        opener.document.getElementById('throat').value = obj.throat;
+        opener.document.getElementById('ear_l').value = obj.ear_l;
+        opener.document.getElementById('ear_r').value = obj.ear_r; 
+        
+        
+        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("cvscheck");
+        if (XMLAddress1[0].childNodes[0].nodeValue == "dr") {
+            opener.document.form1.dr.checked = true;
+        } else if (XMLAddress1[0].childNodes[0].nodeValue == "mumber") {
+            opener.document.form1.mumber.checked = true;
+        }
+        
+        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("respinacheck");
+        if (XMLAddress1[0].childNodes[0].nodeValue == "scr") {
+            opener.document.form1.scr.checked = true;
+        } else if (XMLAddress1[0].childNodes[0].nodeValue == "dyspnea") {
+            opener.document.form1.dyspnea.checked = true;
+        }else if (XMLAddress1[0].childNodes[0].nodeValue == "icr") {
+            opener.document.form1.icr.checked = true;
+        }
+        
+        
         
         XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sales_table");
         opener.document.getElementById('myTable').innerHTML = XMLAddress1[0].childNodes[0].nodeValue;
@@ -479,41 +550,41 @@ function passcusresult_quot()
 function add()
 {   
  
-			 
-			xmlHttp=GetXmlHttpObject();
-			if (xmlHttp==null)
-			{
-				alert ("Browser does not support HTTP Request");
-				return;
-			} 		 
+             
+            xmlHttp=GetXmlHttpObject();
+            if (xmlHttp==null)
+            {
+                alert ("Browser does not support HTTP Request");
+                return;
+            }        
 
-			 var url="medical_data.php"; 
+             var url="medical_data.php"; 
               if (document.getElementById('item').value == "") {
-		         alert('Item is Empty...');
+                 alert('Item is Empty...');
                 return;
              } 
              if (document.getElementById('qty').value == "") {
-		         alert('Qty is Empty...');
+                 alert('Qty is Empty...');
                 return;
              } 
               
-		     var params ="Command="+"addtreat";   
-		     params = params + "&Command1=add"; 
+             var params ="Command="+"addtreat";   
+             params = params + "&Command1=add"; 
              params=params+"&item="+document.getElementById('item').value;   
              params=params+"&uniq="+document.getElementById('uniq').value;   
              params=params+"&qty="+document.getElementById('qty').value;     
              params=params+"&medino="+document.getElementById('medino').value;    
-			
-			xmlHttp.open("POST", url, true);
+            
+            xmlHttp.open("POST", url, true);
 
-	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlHttp.setRequestHeader("Content-length", params.length);
-	xmlHttp.setRequestHeader("Connection", "close");
-	
-	xmlHttp.onreadystatechange=re_treat;
-			
-	xmlHttp.send(params);
-			
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.setRequestHeader("Content-length", params.length);
+    xmlHttp.setRequestHeader("Connection", "close");
+    
+    xmlHttp.onreadystatechange=re_treat;
+            
+    xmlHttp.send(params);
+            
 }
 
  
@@ -522,30 +593,30 @@ function del_item(cdata)
 {   
  
     
-		xmlHttp=GetXmlHttpObject();
-			if (xmlHttp==null)
-			{
-				alert ("Browser does not support HTTP Request");
-				return;
-			} 
-			 
-		        var url="medical_data.php"; 
-			    var params ="Command="+"addtreat";  
-    			params=params+"&Command1=del"; 
-    			params=params+"&id="+cdata; 
-    			params=params+"&medino="+document.getElementById('medino').value;    
-    		    params=params+"&uniq="+document.getElementById('uniq').value;    
-		  
-	xmlHttp.open("POST", url, true);
+        xmlHttp=GetXmlHttpObject();
+            if (xmlHttp==null)
+            {
+                alert ("Browser does not support HTTP Request");
+                return;
+            } 
+             
+                var url="medical_data.php"; 
+                var params ="Command="+"addtreat";  
+                params=params+"&Command1=del"; 
+                params=params+"&id="+cdata; 
+                params=params+"&medino="+document.getElementById('medino').value;    
+                params=params+"&uniq="+document.getElementById('uniq').value;    
+          
+    xmlHttp.open("POST", url, true);
 
-	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlHttp.setRequestHeader("Content-length", params.length);
-	xmlHttp.setRequestHeader("Connection", "close");
-	
-	xmlHttp.onreadystatechange=re_treat;
-			
-	xmlHttp.send(params);
-			
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.setRequestHeader("Content-length", params.length);
+    xmlHttp.setRequestHeader("Connection", "close");
+    
+    xmlHttp.onreadystatechange=re_treat;
+            
+    xmlHttp.send(params);
+            
 }
  
 function re_treat() {
@@ -564,32 +635,32 @@ function re_treat() {
 function cancel_inv()
 {   
  
-			 
-			xmlHttp=GetXmlHttpObject();
-			if (xmlHttp==null)
-			{
-				alert ("Browser does not support HTTP Request");
-				return;
-			} 		
-			
-		  var msg = confirm("Do you want to CANCEL this ! ");
+             
+            xmlHttp=GetXmlHttpObject();
+            if (xmlHttp==null)
+            {
+                alert ("Browser does not support HTTP Request");
+                return;
+            }       
+            
+          var msg = confirm("Do you want to CANCEL this ! ");
         if (msg == true) {
 
-			 var url="medical_data.php"; 
-			    var params ="Command="+"cancel_inv"; 
+             var url="medical_data.php"; 
+                var params ="Command="+"cancel_inv"; 
                 params=params+"&medino="+document.getElementById('medino').value;   
-			   
-			xmlHttp.open("POST", url, true);
+               
+            xmlHttp.open("POST", url, true);
 
-	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlHttp.setRequestHeader("Content-length", params.length);
-	xmlHttp.setRequestHeader("Connection", "close");
-	
-	xmlHttp.onreadystatechange=re_cancel;
-			
-	xmlHttp.send(params);
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.setRequestHeader("Content-length", params.length);
+    xmlHttp.setRequestHeader("Connection", "close");
+    
+    xmlHttp.onreadystatechange=re_cancel;
+            
+    xmlHttp.send(params);
         }  
-			
+            
 }
 
 function re_cancel() {

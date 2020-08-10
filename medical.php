@@ -217,7 +217,7 @@ session_start();
 													<select name="general" id="general" style="width: 100%"  multiple="multiple"  class="form-control input-sm"> 
 														<?php
 														require_once("./connection_sql.php");
-														$sql = "Select * from complain  where cancel ='0'";
+														$sql = "Select * from general  where cancel ='0'";
 														foreach ($conn->query($sql) as $row) {
 															echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
 														}
@@ -234,7 +234,7 @@ session_start();
 													</div>
 													<div class="form-group col-md-5">
 														<label for="inputPassword4">BP</label>
-														<input type="number" class="form-control" id="bp" placeholder=" BP">
+														<input type="number" class="form-control" id="bp1" placeholder=" BP">
 													</div>
 												</div> 
 											</div>
@@ -243,11 +243,11 @@ session_start();
 												<div class="form-row">
 													<div class="form-group col-md-5">
 														<label for="inputEmail4">DR</label>
-														<input type="radio" class="form-check-label" id="cvs" placeholder="HR">
+														<input type="radio" class="form-check-label" id="dr"   name="cvscheck" placeholder="DR">
 													</div>
 													<div class="form-group col-md-5">
 														<label for="inputPassword4">MURMER</label>
-														<input type="radio" class="form-check-label" id="cvs" placeholder=" BP">
+														<input type="radio" class="form-check-label" id="mumber" name="cvscheck" placeholder="MURMER">
 													</div>
 												</div> 
 											</div>
@@ -261,15 +261,15 @@ session_start();
 												<label class="col-md-3" for="txt_usernm"></label>
 												<div class="form-group col-md-3">
 													<label for="inputEmail4">SCR</label>
-													<input type="radio" class="form-check-label" id="scr" placeholder="SCR">
+													<input type="radio" class="form-check-label" id="scr" name="respinacheck" placeholder="SCR">
 												</div>
 												<div class="form-group col-md-4">
 													<label for="inputPassword4">DYSPNEA</label>
-													<input type="radio" class="form-check-label" id="dyspnea" placeholder="DYSPNEA">
+													<input type="radio" class="form-check-label" id="dyspnea"  name="respinacheck"placeholder="DYSPNEA">
 												</div>
 												<div class="form-group col-md-2">
 													<label for="inputPassword4">ICR</label>
-													<input type="radio" class="form-check-label" id="icr" placeholder="ICR">
+													<input type="radio" class="form-check-label" id="icr" name="respinacheck" placeholder="ICR">
 												</div>
 											</div> 
 
@@ -282,7 +282,7 @@ session_start();
 													<select name="lungs" id="lungs" style="width: 100%"  multiple="multiple"  class="form-control input-sm"> 
 														<?php
 														require_once("./connection_sql.php");
-														$sql = "Select * from complain  where cancel ='0'";
+														$sql = "Select * from lungs  where cancel ='0'";
 														foreach ($conn->query($sql) as $row) {
 															echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
 														}
@@ -296,7 +296,7 @@ session_start();
 													<select name="abdomen" id="abdomen" style="width: 100%"  multiple="multiple"  class="form-control input-sm"> 
 														<?php
 														require_once("./connection_sql.php");
-														$sql = "Select * from complain  where cancel ='0'";
+														$sql = "Select * from abdomen  where cancel ='0'";
 														foreach ($conn->query($sql) as $row) {
 															echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
 														}
@@ -310,7 +310,7 @@ session_start();
 													<select name="cns" id="cns" style="width: 100%"  multiple="multiple"  class="form-control input-sm"> 
 														<?php
 														require_once("./connection_sql.php");
-														$sql = "Select * from complain  where cancel ='0'";
+														$sql = "Select * from cns  where cancel ='0'";
 														foreach ($conn->query($sql) as $row) {
 															echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
 														}
