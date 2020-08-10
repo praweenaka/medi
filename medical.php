@@ -146,7 +146,7 @@ session_start();
 									<div id='invdt' class="box-body">
 										<div class="form-group"> 
 											<div class="col-md-6">
-												<select name="item" id="item" class="form-control input-sm" >
+												<select name="item" id="item" onclick="focu();" class="form-control input-sm" >
 													<?php
 													require_once("./connection_sql.php");
 													$sql = "Select * from s_mas  where cancel ='0'";

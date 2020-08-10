@@ -265,7 +265,7 @@ if ($operation == "HISTORY") {
 
     $cuscode = $_GET["custno"];
 
-    $sql = "Select * from medical where cancel='0' and flag='1' and medino ='" . $cuscode . "'";
+    $sql = "Select * from medical where   medino ='" . $cuscode . "'";
     $sql = $conn->query($sql);
 
     if ($rowM = $sql->fetch()) {

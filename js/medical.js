@@ -107,13 +107,17 @@ function new_ent() {
 }
 
 
-// var input = document.getElementById("nic");
-// input.addEventListener("keyup", function (event) {
-//   event.preventDefault();
-//   if (event.keyCode == 13) {
-//     document.getElementById("tel").focus();
-// }
-// });
+var input = document.getElementById("qty");
+input.addEventListener("keyup", function (event) {
+  event.preventDefault();
+  if (event.keyCode == 13) {
+    add();
+}
+});
+
+ 
+    
+ 
 
 
 function getdt() {
@@ -475,6 +479,9 @@ function passcusresult_quot()
         // opener.document.getElementById('lungs').innerHTML. = obj.lungs; 
         // opener.document.getElementById('abdomen').innerHTML. = obj.abdomen; 
         // opener.document.getElementById('cns').innerHTML. = obj.cns; 
+         
+        
+     
         
         opener.document.getElementById('fbc').value = obj.fbc;
         opener.document.getElementById('wbc').value = obj.wbc;
@@ -519,25 +526,20 @@ function passcusresult_quot()
         opener.document.getElementById('ear_l').value = obj.ear_l;
         opener.document.getElementById('ear_r').value = obj.ear_r; 
         
+        if(obj.cvscheck=="dr"){
+           opener.document.getElementById('dr').checked = true;
+        }else if(obj.cvscheck=="mumber"){
+           opener.document.getElementById('mumber').checked = true;
+        } 
         
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("cvscheck");
-        if (XMLAddress1[0].childNodes[0].nodeValue == "dr") {
-            opener.document.form1.dr.checked = true;
-        } else if (XMLAddress1[0].childNodes[0].nodeValue == "mumber") {
-            opener.document.form1.mumber.checked = true;
+        if(obj.respinacheck=="scr"){
+           opener.document.getElementById('scr').checked = true;
+        }else if(obj.respinacheck=="dyspnea"){
+           opener.document.getElementById('dyspnea').checked = true;
+        } else if(obj.respinacheck=="icr"){
+           opener.document.getElementById('icr').checked = true;
         }
-        
-        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("respinacheck");
-        if (XMLAddress1[0].childNodes[0].nodeValue == "scr") {
-            opener.document.form1.scr.checked = true;
-        } else if (XMLAddress1[0].childNodes[0].nodeValue == "dyspnea") {
-            opener.document.form1.dyspnea.checked = true;
-        }else if (XMLAddress1[0].childNodes[0].nodeValue == "icr") {
-            opener.document.form1.icr.checked = true;
-        }
-        
-        
-        
+         
         XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("sales_table");
         opener.document.getElementById('myTable').innerHTML = XMLAddress1[0].childNodes[0].nodeValue;
         
@@ -628,6 +630,7 @@ function re_treat() {
          
         
          document.getElementById('qty').value ="";
+          document.getElementById('item').focus();
     }
 }
 
@@ -677,3 +680,10 @@ function re_cancel() {
 
 }
  
+ 
+ function focu() { 
+     
+    
+     document.getElementById('qty').focus(); 
+     
+}

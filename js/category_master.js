@@ -51,6 +51,7 @@ function add(cdata)
                  }
 			    var params ="Command="+"addinvesti";  
     			params=params+"&investi_name="+document.getElementById('investi_name').value;  
+    			
 			 }else if(cdata=="allergy"){
 			     if (document.getElementById('allergy_name').value == "") {
 			         alert('Allergy Name is Empty...');
@@ -58,6 +59,7 @@ function add(cdata)
                  }
 			    var params ="Command="+"addallergy"; 
                 params=params+"&allergy_name="+document.getElementById('allergy_name').value;   
+                
 			 }else if(cdata=="complain"){
 			     if (document.getElementById('complain_name').value == "") {
 			         alert('Complain Name is Empty...');
@@ -65,6 +67,7 @@ function add(cdata)
                  }
 			    var params ="Command="+"addcomplain"; 
                 params=params+"&complain_name="+document.getElementById('complain_name').value;   
+                
 			 }else if(cdata=="s_diag"){
 			     if (document.getElementById('s_diag').value == "") {
 			         alert('Diagnosis Name is Empty...');
@@ -72,6 +75,39 @@ function add(cdata)
                  }
 			    var params ="Command="+"addsdiag"; 
                 params=params+"&s_diag="+document.getElementById('s_diag').value;   
+                
+			 }else if(cdata=="general"){
+			     if (document.getElementById('general_name').value == "") {
+			         alert('General Name is Empty...');
+                    return;
+                 }
+			    var params ="Command="+"addgeneral"; 
+                params=params+"&general_name="+document.getElementById('general_name').value;   
+                
+			 }else if(cdata=="lungs"){
+			     if (document.getElementById('lungs_name').value == "") {
+			         alert('Lungs Name is Empty...');
+                    return;
+                 }
+			    var params ="Command="+"addlungs"; 
+                params=params+"&lungs_name="+document.getElementById('lungs_name').value;   
+                
+			 }else if(cdata=="abdomen"){
+			     if (document.getElementById('abdomen_name').value == "") {
+			         alert('Abdomen Name is Empty...');
+                    return;
+                 }
+			    var params ="Command="+"addabdomen"; 
+                params=params+"&abdomen_name="+document.getElementById('abdomen_name').value;   
+                
+			 }else if(cdata=="cns"){
+			     if (document.getElementById('cns_name').value == "") {
+			         alert('Cns Name is Empty...');
+                    return;
+                 }
+			    var params ="Command="+"addcns"; 
+                params=params+"&cns_name="+document.getElementById('cns_name').value;   
+                
 			 }
              
 		 
@@ -102,7 +138,7 @@ function remove_add(id,cdata)
         if (msg == true) {
 
 			 var url="category_master_data.php";
-			   if(cdata=="investi"){ 
+			 if(cdata=="investi"){ 
 			    var params ="Command="+"removeinvesti";  
     			params=params+"&id="+id;   
 			 }else if(cdata=="allergy"){ 
@@ -113,6 +149,18 @@ function remove_add(id,cdata)
                 params=params+"&id="+id;   
 			 }else if(cdata=="s_diag"){ 
 			    var params ="Command="+"removes_diag"; 
+                params=params+"&id="+id;   
+			 }else if(cdata=="general"){ 
+			    var params ="Command="+"removegeneral"; 
+                params=params+"&id="+id;   
+			 }else if(cdata=="lungs"){ 
+			    var params ="Command="+"removelungs"; 
+                params=params+"&id="+id;   
+			 }else if(cdata=="abdomen"){ 
+			    var params ="Command="+"removeabdomen"; 
+                params=params+"&id="+id;   
+			 }else if(cdata=="cns"){ 
+			    var params ="Command="+"removecns"; 
                 params=params+"&id="+id;   
 			 }
              
