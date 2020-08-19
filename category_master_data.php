@@ -143,7 +143,7 @@ if ($_POST["Command"] == "addlungs") {
         $sqlsave = "Insert into lungs(name,user,datetime) values ('" . $_POST['lungs_name'] . "','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."') ";
         $resultsave = $conn->query($sqlsave);
  
-        $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_POST['lungs_name'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Lungs', 'Save', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+        $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_POST['lungs_name'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Lungs', 'SAVE', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
         $result2 = $conn->query($sql2);
         
         $conn->commit();
