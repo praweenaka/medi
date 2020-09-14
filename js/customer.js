@@ -243,3 +243,38 @@ function passcusresult_quot()
 
 
 }
+
+
+ function datecal()
+{
+    //alert(code);
+    xmlHttp = GetXmlHttpObject();
+    if (xmlHttp == null)
+    {
+        alert("Browser does not support HTTP Request");
+        return;
+    }
+    var url = "customer_data.php";
+    url = url + "?Command=" + "datecal";
+     url = url + "&age1=" + document.getElementById('age1').value;
+
+    xmlHttp.onreadystatechange = re_datecal;
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+
+}
+
+function re_datecal()
+{
+    var XMLAddress1;
+
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
+    {
+ 
+        XMLAddress1 = xmlHttp.responseXML.getElementsByTagName("age");
+        document.getElementById('age').value = XMLAddress1[0].childNodes[0].nodeValue;
+    }
+
+
+
+}

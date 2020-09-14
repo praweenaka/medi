@@ -99,7 +99,7 @@ include_once './footer.php';
     });
 </script>
 <?php
-include './autocomple_gl.php';
+// include './add_patient_pop.php';
 ?>
 
 <!--<link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.min.css" />
