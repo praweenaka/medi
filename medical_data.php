@@ -53,7 +53,7 @@ if ($operation == "SAVE") {
          $sql1 = "SELECT * FROM customer where code='".$cols[code]."'";
          $result1 = $conn->query($sql1);
          $row1= $result1->fetch();
-         if($_SESSION['User_Type']=="ADMIN"){
+         if($_SESSION['user_type']=="ADMIN"){
              $flg=1;
          }else{
              $flg=0;
@@ -108,7 +108,7 @@ if ($operation == "HISTORY") {
        $ResponseXML .= "<resu><![CDATA[0]]></resu>"; 
    }
    
-   if($_SESSION['User_Type']=="ADMIN"){
+   if($_SESSION['user_type']=="ADMIN"){
        $ResponseXML .= "<sales_table><![CDATA[ <table class=\"table\">     
    <tr class=\"info\">
    <th style=\"width: 300px;\">DATE</th> 

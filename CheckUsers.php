@@ -29,7 +29,7 @@ if ($Command == "CheckUsers") {
         session_regenerate_id();
         $ip = $_SERVER['REMOTE_ADDR'];
         $_SESSION['UserName'] = $UserName; 
-        $_SESSION['User_Type'] = $row['user_type'];
+        $_SESSION['user_type'] = $row['user_type'];
         $_SESSION['CURRENT_USER'] = $UserName;
        
 
