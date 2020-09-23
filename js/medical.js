@@ -447,13 +447,19 @@ function re_save() {
         alert("Browser does not support HTTP Request");
         return;
     }
+    
     var url = "medical_data.php";
-    url = url + "?Command=" + "pass_quot";
-    url = url + "&custno=" + code;
+    var params = "Command=" + "pass_quot";
+    params = params + "&custno=" + code;
+
+    xmlHttp.open("POST", url, true);
+
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.setRequestHeader("Content-length", params.length);
+    xmlHttp.setRequestHeader("Connection", "close");
 
     xmlHttp.onreadystatechange = passcusresult_quot;
-    xmlHttp.open("GET", url, true);
-    xmlHttp.send(null);
+    xmlHttp.send(params); 
 
 }
 
@@ -469,16 +475,16 @@ function passcusresult_quot()
         var obj = JSON.parse(XMLAddress1[0].childNodes[0].nodeValue);
          
         opener.document.getElementById('medino').value = obj.medino;
-        // opener.document.getElementById('name').value = obj.name; 
+        opener.document.getElementById('name').value = obj.cuscode; 
         opener.document.getElementById('sdate').value = obj.sdate; 
         opener.document.getElementById('ndate').value = obj.ndate;  
-        // opener.document.getElementById('note').innerHTML. = obj.note; 
-        // opener.document.getElementById('investi').innerHTML. = obj.investi; 
-        // opener.document.getElementById('complain').innerHTML. = obj.complain; 
-        // opener.document.getElementById('general').innerHTML. = obj.general; 
-        // opener.document.getElementById('lungs').innerHTML. = obj.lungs; 
-        // opener.document.getElementById('abdomen').innerHTML. = obj.abdomen; 
-        // opener.document.getElementById('cns').innerHTML. = obj.cns; 
+        opener.document.getElementById('note').innerHTML = obj.note;  
+        opener.document.getElementById('investi').innerHTML = obj.investi; 
+        opener.document.getElementById('complain').innerHTML = obj.complain; 
+        opener.document.getElementById('general').innerHTML = obj.general; 
+        opener.document.getElementById('lungs').innerHTML = obj.lungs; 
+        opener.document.getElementById('abdomen').innerHTML = obj.abdomen; 
+        opener.document.getElementById('cns').innerHTML = obj.cns; 
          
         
      

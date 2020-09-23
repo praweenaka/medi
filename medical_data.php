@@ -87,7 +87,7 @@ if ($operation == "SAVE") {
 
 
 if ($operation == "HISTORY") { 
-
+session_start();
     header('Content-Type: text/xml');
     echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 
@@ -97,7 +97,7 @@ if ($operation == "HISTORY") {
     $sql = "Select * from medical where cuscode ='" . $cols[name] . "'";  
     $sql = $conn->query($sql);
     if ($row = $sql->fetch()) {
-        $sql = "Select * from medical where cuscode ='" . $cols[name] . "'";  
+        $sql = "Select * from medical where cuscode ='" . $cols[name] . "'";   
         foreach ($conn->query($sql) as $row) {  
             $myArr = array($row['sdate'],floatval($row['pr'])); 
             $myJSON = json_encode($myArr); 
@@ -159,7 +159,7 @@ if ($operation == "HISTORY") {
      $ResponseXML .= "<tr>                              
      <td >" . $row['sdate'] . "</td>
      <td >" . $row['complain'] . "</td>
-      <td style=\"background-color: #f5ea84;\"><b>" . $row['treatment'] . "</b></td>
+      <td style=\"background-color: #f5ea84;\"><b>" . $row['investi'] . "</b></td>
      <td >" . $row['ndate'] . "</td>
      <td >" . $row['note'] . "</td>
      <td >" . $row['fbc'] . "</td>
@@ -254,8 +254,8 @@ if ($operation == "HISTORY") {
  echo $ResponseXML;
 }
 
- if ($_GET["Command"] == "pass_quot") {
-    $_SESSION["custno"] = $_GET['custno'];
+ if ($_POST["Command"] == "pass_quot") {
+    $_SESSION["custno"] = $_POST['custno'];
 
     header('Content-Type: text/xml');
     echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
@@ -263,7 +263,7 @@ if ($operation == "HISTORY") {
     $ResponseXML = "";
     $ResponseXML .= "<salesdetails>";
 
-    $cuscode = $_GET["custno"];
+    $cuscode = $_POST["custno"];
 
     $sql = "Select * from medical where   medino ='" . $cuscode . "'";
     $sql = $conn->query($sql);

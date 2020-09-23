@@ -44,6 +44,7 @@ function newent() {
 
 
   document.getElementById('cust_txt').value = "";
+  document.getElementById('age1').value = "";
   document.getElementById('uniq').value = "";
   document.getElementById('name_txt').value = "";
   document.getElementById('addr1_txt').value = ""; 
@@ -119,12 +120,9 @@ function save_inv()
 
   var url = "customer_data.php";
   url = url + "?Command=" + "save_item";
-
-
-  var allergy = $('#allergy').val(); 
-  var s_diag = $('#s_diag').val(); 
-  url = url + "&allergy=" + allergy;   
-  url = url + "&s_diag=" + s_diag;   
+ 
+ url = url + "&s_diag=" + document.getElementById('s_diag').value;
+  url = url + "&allergy=" + document.getElementById('allergy').value;
   url = url + "&cust_txt=" + document.getElementById('cust_txt').value;
   url = url + "&uniq=" + document.getElementById('uniq').value;
   url = url + "&name_txt=" + document.getElementById('name_txt').value;
@@ -239,13 +237,10 @@ function passcusresult_quot()
         
         self.close();
     }
-
-
-
+ 
 }
 
-
- function datecal()
+function datecal()
 {
     //alert(code);
     xmlHttp = GetXmlHttpObject();
