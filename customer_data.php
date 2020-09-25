@@ -18,13 +18,13 @@ if ($_GET["Command"] == "getdt") {
     $result = $conn->query($sql);
     $row = $result->fetch();
     $no = $row['ctmcode'];
-
+ 
     $uniq = uniqid();
 
     $tmpinvno = "0000" . $no;
     $lenth = strlen($tmpinvno);
     $no = trim("SEN/") . substr($tmpinvno, $lenth - 5);
-
+ 
     $ResponseXML .= "<cust_txt><![CDATA[$no]]></cust_txt>";
     $ResponseXML .= "<uniq><![CDATA[$uniq]]></uniq>";
     
@@ -52,11 +52,11 @@ if ($_GET["Command"] == "save_item") {
         $bgroup=$_GET['bgroup']; 
         $sql1 = "Insert into customer(code,uniq,name,add1,tel,age,bgroup,allergy,email,note,user,sdate,s_diag)values
         ('" . $_GET['cust_txt'] . "','" . $_GET['uniq'] . "','" . $_GET['name_txt'] . "','" . $_GET['addr1_txt'] . "','" . $_GET['contact_txt'] . "','" . $_GET['age'] . "','".$bgroup."','".$_GET['allergy']."','" . $_GET['email'] . "','" . $_GET['note'] . "','".$_SESSION['UserName']."','".date('Y-m-d H:i:s')."','" . $_GET['s_diag'] . "')";
-
+ 
         $result = $conn->query($sql1);
         
-        $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_GET['cust_txt'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Pation', 'Save', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
-        $result2 = $conn->query($sql2);
+         $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_GET['cust_txt'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Pation', 'Save', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+         $result2 = $conn->query($sql2);
         
         $sql = "update invpara set ctmcode=ctmcode+1";
         $result = $conn->query($sql);
@@ -71,28 +71,54 @@ if ($_GET["Command"] == "save_item") {
 
 if ($_GET["Command"] == "cancel") {
 
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $conn->beginTransaction();
-    try {
-        $sql1 = "select * from customer where code = '" . $_GET['cust_txt'] . "'";
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn->beginTransaction();
+        try {
+            $sql1 = "select * from customer where code = '" . $_GET['cust_txt'] . "'";
         $result1 = $conn->query($sql1); 
         if ($row1 = $result1->fetch()) {
             $sql = "update customer set cancel ='1' where code='".$_GET['cust_txt']."'";
-            $result = $conn->query($sql);
-
-            $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_GET['cust_txt'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Pation', 'Cancel', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
-            $result2 = $conn->query($sql2);
-
+             $result = $conn->query($sql);
+             
+             $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_GET['cust_txt'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Pation', 'Cancel', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+             $result2 = $conn->query($sql2);
+    
             $conn->commit();
             echo "Canceled";
         }else{
             echo "No Result Found..";
         }
+            
+        } catch (Exception $e) {
+            $conn->rollBack();
+            echo $e;
+        }
+}
 
-    } catch (Exception $e) {
-        $conn->rollBack();
-        echo $e;
-    }
+if ($_GET["Command"] == "update") {
+
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn->beginTransaction();
+        try {
+            $sql1 = "select * from customer where code = '" . $_GET['cust_txt'] . "'";
+            $result1 = $conn->query($sql1); 
+            if ($row1 = $result1->fetch()) {
+                $sql = "update customer set name ='".$_GET['name_txt']."',add1 ='".$_GET['addr1_txt']."',tel ='".$_GET['contact_txt']."',age ='".$_GET['age']."',bgroup ='".$_GET['bgroup']."',allergy ='".$_GET['allergy']."',email ='".$_GET['email']."',note ='".$_GET['note']."',s_diag ='".$_GET['s_diag']."' where code='".$_GET['cust_txt']."'";
+                 $result = $conn->query($sql);
+                  
+                 $sql2 = "insert into entry_log(refno, username, docname, trnType, stime, sdate) values ('" . $_GET['cust_txt'] . "', '" . $_SESSION["CURRENT_USER"] . "', 'Pation', 'Update', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d") . "')";
+                 $result2 = $conn->query($sql2);
+        
+                $conn->commit();
+                echo "Update";
+            }else{
+                echo "No Result Found..";
+            }
+            
+        } catch (Exception $e) {
+            $conn->rollBack();
+            echo $e;
+        }
 }
 
 if ($_GET["Command"] == "pass_quot") {
@@ -144,4 +170,6 @@ if ($_GET["Command"] == "datecal") {
 }
 
 
+
+  
 ?>

@@ -111,7 +111,7 @@ function save_inv()
     return false;
   }
   if (document.getElementById('name_txt').value == "") {
-    document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Name Not Entered..</span></div>";
+    document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Patient Not Entered..</span></div>";
 
     return false;
   }
@@ -151,6 +151,62 @@ function salessaveresult() {
   }
 }
 
+function update()
+{
+
+  xmlHttp = GetXmlHttpObject();
+  if (xmlHttp == null)
+  {
+    alert("Browser does not support HTTP Request");
+    return;
+  }
+
+
+  if (document.getElementById('cust_txt').value == "") {
+    document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Please Click New</span></div>";
+
+    return false;
+  }
+  if (document.getElementById('name_txt').value == "") {
+    document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>Please Select Patient</span></div>";
+
+    return false;
+  }
+
+
+
+  var url = "customer_data.php";
+  url = url + "?Command=" + "update";
+ 
+  url = url + "&s_diag=" + document.getElementById('s_diag').value;
+  url = url + "&allergy=" + document.getElementById('allergy').value;
+  url = url + "&cust_txt=" + document.getElementById('cust_txt').value;
+  url = url + "&uniq=" + document.getElementById('uniq').value;
+  url = url + "&name_txt=" + document.getElementById('name_txt').value;
+  url = url + "&addr1_txt=" + document.getElementById('addr1_txt').value;
+  url = url + "&age=" + document.getElementById('age').value; 
+  url = url + "&contact_txt=" + document.getElementById('contact_txt').value; 
+  url = url + "&bgroup=" + document.getElementById('bgroup').value; 
+  url = url + "&email=" + document.getElementById('email').value; 
+  url = url + "&note=" + document.getElementById('note').value; 
+  xmlHttp.onreadystatechange = re_update;
+  xmlHttp.open("GET", url, true);
+  xmlHttp.send(null);
+}
+
+function re_update() {
+  var XMLAddress1;
+
+  if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+
+    if (xmlHttp.responseText == "Update") {
+      document.getElementById('msg_box').innerHTML = "<div class='alert alert-success' role='alert'><span class='center-block'>Updated</span></div>";
+     setTimeout("location.reload(true);", 500);
+    } else {
+      document.getElementById('msg_box').innerHTML = "<div class='alert alert-warning' role='alert'><span class='center-block'>" + xmlHttp.responseText + "</span></div>";
+    }
+  }
+}
 
 
  
