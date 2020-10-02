@@ -558,41 +558,41 @@ function passcusresult_quot()
 function add()
 {   
  
-             
-            xmlHttp=GetXmlHttpObject();
-            if (xmlHttp==null)
-            {
-                alert ("Browser does not support HTTP Request");
-                return;
-            }        
+			 
+			xmlHttp=GetXmlHttpObject();
+			if (xmlHttp==null)
+			{
+				alert ("Browser does not support HTTP Request");
+				return;
+			} 		 
 
-             var url="medical_data.php"; 
+			 var url="medical_data.php"; 
               if (document.getElementById('item').value == "") {
-                 alert('Item is Empty...');
+		         alert('Item is Empty...');
                 return;
              } 
              if (document.getElementById('qty').value == "") {
-                 alert('Qty is Empty...');
+		         alert('Qty is Empty...');
                 return;
              } 
               
-             var params ="Command="+"addtreat";   
-             params = params + "&Command1=add"; 
+		     var params ="Command="+"addtreat";   
+		     params = params + "&Command1=add"; 
              params=params+"&item="+document.getElementById('item').value;   
              params=params+"&uniq="+document.getElementById('uniq').value;   
              params=params+"&qty="+document.getElementById('qty').value;     
              params=params+"&medino="+document.getElementById('medino').value;    
-            
-            xmlHttp.open("POST", url, true);
+			
+			xmlHttp.open("POST", url, true);
 
-    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlHttp.setRequestHeader("Content-length", params.length);
-    xmlHttp.setRequestHeader("Connection", "close");
-    
-    xmlHttp.onreadystatechange=re_treat;
-            
-    xmlHttp.send(params);
-            
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlHttp.setRequestHeader("Content-length", params.length);
+	xmlHttp.setRequestHeader("Connection", "close");
+	
+	xmlHttp.onreadystatechange=re_treat;
+			
+	xmlHttp.send(params);
+			
 }
 
  
@@ -601,30 +601,30 @@ function del_item(cdata)
 {   
  
     
-        xmlHttp=GetXmlHttpObject();
-            if (xmlHttp==null)
-            {
-                alert ("Browser does not support HTTP Request");
-                return;
-            } 
-             
-                var url="medical_data.php"; 
-                var params ="Command="+"addtreat";  
-                params=params+"&Command1=del"; 
-                params=params+"&id="+cdata; 
-                params=params+"&medino="+document.getElementById('medino').value;    
-                params=params+"&uniq="+document.getElementById('uniq').value;    
-          
-    xmlHttp.open("POST", url, true);
+		xmlHttp=GetXmlHttpObject();
+			if (xmlHttp==null)
+			{
+				alert ("Browser does not support HTTP Request");
+				return;
+			} 
+			 
+		        var url="medical_data.php"; 
+			    var params ="Command="+"addtreat";  
+    			params=params+"&Command1=del"; 
+    			params=params+"&id="+cdata; 
+    			params=params+"&medino="+document.getElementById('medino').value;    
+    		    params=params+"&uniq="+document.getElementById('uniq').value;    
+		  
+	xmlHttp.open("POST", url, true);
 
-    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlHttp.setRequestHeader("Content-length", params.length);
-    xmlHttp.setRequestHeader("Connection", "close");
-    
-    xmlHttp.onreadystatechange=re_treat;
-            
-    xmlHttp.send(params);
-            
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlHttp.setRequestHeader("Content-length", params.length);
+	xmlHttp.setRequestHeader("Connection", "close");
+	
+	xmlHttp.onreadystatechange=re_treat;
+			
+	xmlHttp.send(params);
+			
 }
  
 function re_treat() {
@@ -644,32 +644,32 @@ function re_treat() {
 function cancel_inv()
 {   
  
-             
-            xmlHttp=GetXmlHttpObject();
-            if (xmlHttp==null)
-            {
-                alert ("Browser does not support HTTP Request");
-                return;
-            }       
-            
-          var msg = confirm("Do you want to CANCEL this ! ");
+			 
+			xmlHttp=GetXmlHttpObject();
+			if (xmlHttp==null)
+			{
+				alert ("Browser does not support HTTP Request");
+				return;
+			} 		
+			
+		  var msg = confirm("Do you want to CANCEL this ! ");
         if (msg == true) {
 
-             var url="medical_data.php"; 
-                var params ="Command="+"cancel_inv"; 
+			 var url="medical_data.php"; 
+			    var params ="Command="+"cancel_inv"; 
                 params=params+"&medino="+document.getElementById('medino').value;   
-               
-            xmlHttp.open("POST", url, true);
+			   
+			xmlHttp.open("POST", url, true);
 
-    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlHttp.setRequestHeader("Content-length", params.length);
-    xmlHttp.setRequestHeader("Connection", "close");
-    
-    xmlHttp.onreadystatechange=re_cancel;
-            
-    xmlHttp.send(params);
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlHttp.setRequestHeader("Content-length", params.length);
+	xmlHttp.setRequestHeader("Connection", "close");
+	
+	xmlHttp.onreadystatechange=re_cancel;
+			
+	xmlHttp.send(params);
         }  
-            
+			
 }
 
 function re_cancel() {

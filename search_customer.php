@@ -7,6 +7,7 @@ include_once './connection_sql.php';
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
         <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
 
 
@@ -53,8 +54,8 @@ include_once './connection_sql.php';
             <table id="testTable"  class="table table-bordered">
                 <?php
  
-                    $sql2 = "SELECT * from customer where cancel = '0' order by id desc";
-                
+                $sql2 = "SELECT * from customer where cancel = '0'  ";
+                 
                 echo "<table id='example'  class='table table-bordered' style='font-size: 14px;'>";
 
                 echo "<thead><tr>";
@@ -79,11 +80,16 @@ include_once './connection_sql.php';
 <script type="text/javascript">
     $(document).ready(function() {
         $('#example').dataTable( {
-          "pageLength": 15
+          "pageLength": 10
         } );
     } );
+     
+// $('#example').DataTable( {
+//   "aaSorting": [[ 0, "desc" ]] // Sort by first column descending
+// } );
 
 </script>
+
 
     </body>
 </html>

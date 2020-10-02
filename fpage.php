@@ -59,7 +59,10 @@
             echo"</div>";
 
         }
-        
+
+        echo "</ul>";
+
+        echo "</li>";
 
         ?>
 

@@ -188,11 +188,11 @@
 
 <script>
 $(document).ready(function(){
-  // setTimeout(function(){ new_ent(); }, 500);
-  newent();
-  setInterval(function () {  
-      $('#bgroup').trigger('change');  
-    }, 50);
+	// setTimeout(function(){ new_ent(); }, 500);
+	newent();
+	setInterval(function () {  
+			$('#bgroup').trigger('change');	 
+		}, 50);
 });
  </script>
 

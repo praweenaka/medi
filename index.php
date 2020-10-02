@@ -91,7 +91,7 @@ if (isset($_COOKIE[$cookie_name])) {
                     <div>
                         <!--<img style="align-content: center" class="img-responsive" src="img/Mas_Holdings_Logo.png">-->
                         <div class="form-group" >
-                            <h1 id="topic"><center>SENIMRO <span style="color: red;">MEDICAL</span></center></h1>
+                            <h1 id="topic"><center>MY <span style="color: red;">CLEAN</span></center></h1>
                         </div>
                     </div>
                     <!--<h3><center>MAS HOLDINGS</center></h3>-->
@@ -110,10 +110,10 @@ if (isset($_COOKIE[$cookie_name])) {
                 </div>
                    <div class="col-md-8" style="text-align: center;color: white;font-family: Helvetica, Geneva, sans-serif;font-size: 13px;letter-spacing: 0.4px;word-spacing: 6px;color: white;text-decoration: none;font-style: normal;font-variant: normal;text-transform: none;">
                     <div style="margin-top: 20px;">
-                       <img src="img/logo.jpg"   class="img-fluid" style="width:100%; ">
+                       <img src="img/image.jpg"   class="img-fluid" style="width:100%; ">
                    </div>
                     <div style="margin-top: 60px;margin:  20px;" >
-                   <p><span class="letter-red">C</span>apital<span class="letter-red">W</span>eb <span class="letter-red">S</span>olutions</p>
+                   <!-- <p><span class="letter-red">C</span>apital<span class="letter-red">W</span>eb <span class="letter-red">S</span>olutions</p> -->
                    </div>
                 </div>
                

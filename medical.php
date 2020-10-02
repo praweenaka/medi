@@ -112,7 +112,7 @@ session_start();
       <div class="form-group">
          <label class="col-md-3" for="c_code">DIAGNOSIS</label>
          <div class="col-md-9">
-            <select name="investi" id="investi" style="width: 100%" multiple="multiple" class="form-control input-sm"> 
+             <select name="investi" id="investi" style="width: 100%"  multiple="multiple"  class="form-control input-sm"> 
                <?php
                require_once("./connection_sql.php");
                $sql = "Select * from investigation  where cancel ='0'";
@@ -663,7 +663,17 @@ session_start();
 </div>
 </section>
 <?php
-include './add_patient_pop.php';
+// include './add_patient_pop.php';
 ?>
 <script src="js/medical.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+// 	// setTimeout(function(){ new_ent(); }, 500);
+	new_ent();
+	setInterval(function () {  
+// 			$('#name,#note,#investi,#complain,#general,#lungs,#abdomen,#cns').trigger('change');	 
+// $('#investi').trigger('change');	 	 
+		}, 50);
+});
+ </script>
 <script>setTimeout(function(){ new_ent(); }, 500);</script>

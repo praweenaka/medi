@@ -340,7 +340,7 @@ if ($_POST["Command"] == "addtreat") {
         $row = $result->fetch();
         
         $sql = "Insert into tmp_treat (item,name,qty,tmp_no,medino,user)values
-          ('" . $_POST['item'] . "','" . $row['des'] . "', '" . $_POST['qty'] . "', '" . $_POST['uniq'] . "','" . $_POST['medino'] . "','" . $_SESSION["CURRENT_USER"] . "') ";
+    			('" . $_POST['item'] . "','" . $row['des'] . "', '" . $_POST['qty'] . "', '" . $_POST['uniq'] . "','" . $_POST['medino'] . "','" . $_SESSION["CURRENT_USER"] . "') ";
      
         $result = $conn->query($sql);
  

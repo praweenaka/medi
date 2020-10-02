@@ -2,16 +2,14 @@
 
 session_start();
 
-////////////////////////////////////////////// Database Connector /////////////////////////////////////////////////////////////
+
 require_once ("connection_sql.php");
 
-////////////////////////////////////////////// Write XML ////////////////////////////////////////////////////////////////////
-// header('Content-Type: text/xml');
+header('Content-Type: text/xml');
 
 date_default_timezone_set('Asia/Colombo');
-
 if ($_GET["Command"] == "getdt") {
-    
+    echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 
     $ResponseXML = "";
     $ResponseXML .= "<new>";
