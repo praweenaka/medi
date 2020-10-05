@@ -1,6 +1,6 @@
 <?php
-
 session_start();
+
  
 require_once ("connection_sql.php");
 header('Content-Type: text/xml');
